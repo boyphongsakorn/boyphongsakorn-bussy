@@ -11,6 +11,10 @@
 
 <Styles />
 
+<svelte:head>
+  <title>ตารางงานของ {name}</title>
+</svelte:head>
+
 <main>
   <Row>
     <Col sm="12" md={{ size: 4, offset: 4 }}>
