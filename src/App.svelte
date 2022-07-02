@@ -1,5 +1,5 @@
 <script>
-  import { Styles,Card,Row,Col,Icon } from 'sveltestrap';
+  import { Styles,Card,Row,Col,Icon,Image,Container,Accordion, AccordionItem,Badge } from 'sveltestrap/src';
   let name = ''
   if(window.location.hostname.includes('pwisetthon')){
     name = 'พงศกร วิเศษธร (บอย)';
@@ -8,6 +8,7 @@
   }
   console.log(window.location.hostname)
   let events = [['08-01-2022 00:00','08-01-2022 23:59','นนทุบรี']]
+  let imgsplist = ['https://res.cloudinary.com/dstnfzzu4/image/upload/v1602160097/teamquadb/fire_lqe3xv.png','https://res.cloudinary.com/dstnfzzu4/image/upload/v1626324277/quadb_lott/two-standing-smartphones-mockup_zwf7ls.png','https://res.cloudinary.com/dstnfzzu4/image/upload/v1602162255/teamquadb/120603592_3279839782114711_727098858267587641_o_qrduk3.jpg']
   function getoutoldevents(levents){
     let now = new Date();
     let nowtime = now.getTime();
@@ -92,22 +93,69 @@
   <title>ตารางงานของ {name}</title>
 </svelte:head>
 
-<main>
+<Container>
   <Row>
-    <Col sm="12" md={{ size: 4, offset: 4 }}>
+    <Col sm="12" md={{ size: 6, offset: 3 }}>
       <Card class="mb-1" body><center><h2>ตารางงานของ {name}</h2></center></Card>
       <!--Card body><p class="mb-0"><Icon name="info-square-fill" /> ยังไม่มีตารางงานของ {name}</p></Card-->
-      {#each getoutoldevents(events) as event}
-        <Card body>
-          <p><Icon name="calendar-event" /> {getthaiformat(event[0])}</p>
-          <p><Icon name="shield-fill" /> {event[2]}</p>
-          <p><Icon name="clock-fill" /> {gettime(event[0],event[1])}</p>
-        </Card>
+      <Accordion class="mb-1">
+        {#each getoutoldevents(events) as event, i}
+          {#if i == 0}
+            <AccordionItem active header="{getthaiformat(event[0])} - {event[2]}">
+              <!--Card body-->
+              <p><Icon name="calendar-event" /> {getthaiformat(event[0])}</p>
+              <p><Icon name="shield-fill" /> {event[2]}</p>
+              <p><Icon name="clock-fill" /> {gettime(event[0],event[1])}</p>
+              <!--/Card-->
+            </AccordionItem>
+          {:else}
+            <AccordionItem header="{getthaiformat(event[0])} - {event[2]}">
+              <!--Card body-->
+              <p><Icon name="calendar-event" /> {getthaiformat(event[0])}</p>
+              <p><Icon name="shield-fill" /> {event[2]}</p>
+              <p><Icon name="clock-fill" /> {gettime(event[0],event[1])}</p>
+              <!--/Card-->
+            </AccordionItem>
+          {/if}
+        {/each}
+      </Accordion>
+      {#each imgsplist as img}
+      <div class="jsonArea rounded">
+        <div class="buttonsGroup">
+          <Badge color="danger">Sponsor</Badge>
+        </div>
+      
+        <Image fluid alt="Landscape" src="https://img.gs/fhcphvsghs/1000x300,crop/{img}" />
+      </div>
       {/each}
+      <!--div style="position: relative;">
+        <Image class="mt-1 rounded" fluid alt="Landscape" src="https://img.gs/fhcphvsghs/1000x300,crop/https://res.cloudinary.com/dstnfzzu4/image/upload/v1602160097/teamquadb/fire_lqe3xv.png" />
+        <Badge color="danger" style="position: sticky;display: inline-block;float: right;">Sponsor</Badge>
+      </div-->
+      <!--Image class="mt-1 rounded" fluid alt="Landscape" src="https://img.gs/fhcphvsghs/1000x300,crop=top/" />
+      <Image class="mt-1 rounded" fluid alt="Landscape" src="https://img.gs/fhcphvsghs/1000x300,crop/" /-->
     </Col>
   </Row>
-</main>
+</Container>
 
 <style>
-  
+.buttonsGroup {
+  position: sticky;
+  display: inline-block;
+  float: left;
+  right: 0;
+  height: 0;
+  left: 5px;
+  top: 5px;
+}
+
+.jsonArea {
+  position: relative;
+  overflow: auto;
+  display: inline-block;
+  width: 100%;
+  background-color: #eeeeee;
+  /*border-radius: 10px;
+  -webkit-box-shadow: inset 0 0 12px rgba(0, 0, 0, 0.1);*/
+}
 </style>
