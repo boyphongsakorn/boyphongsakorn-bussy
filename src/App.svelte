@@ -99,14 +99,10 @@
       <Card class="mb-1" body><center><h2>ตารางงานของ {name}</h2></center></Card>
       <!--Card body><p class="mb-0"><Icon name="info-square-fill" /> ยังไม่มีตารางงานของ {name}</p></Card-->
       <Accordion class="mb-1">
+        {#if getoutoldevents(events).length==0}
+          <Card body><p class="mb-0">ยังไม่มีตารางงานของ {name}</p></Card>
+        {/if}
         {#each getoutoldevents(events) as event, i}
-          {#if event.length == 0}
-            <AccordionItem active header="ไม่มีตารางงาน">
-              <!--Card body-->
-              <p>ยังไม่มีตารางงานใหม่</p>
-              <!--/Card-->
-            </AccordionItem>
-          {/if}
           {#if i == 0}
             <AccordionItem active header="{getthaiformat(event[0])} - {event[2]}">
               <!--Card body-->
