@@ -120,7 +120,7 @@
               <AccordionItem active header="{getthaiformat(event[0])} - {event[2]}">
                 <!--Card body-->
                 <p><Icon name="calendar-event" /> {getthaiformat(event[0])}</p>
-                <p><Avatar name="John Walker" src={event[3]} /> {event[2]}</p>
+                <p style="display: inline-flex;"><Avatar src={event[3]} /> {event[2]}</p>
                 <p><Icon name="clock-fill" /> {gettime(event[0],event[1])}</p>
                 <!--/Card-->
               </AccordionItem>
@@ -128,7 +128,7 @@
               <AccordionItem header="{getthaiformat(event[0])} - {event[2]}">
                 <!--Card body-->
                 <p><Icon name="calendar-event" /> {getthaiformat(event[0])}</p>
-                <p><img src={event[3]}> {event[2]}</p>
+                <p style="display: inline-flex;"><Avatar src={event[3]} /> {event[2]}</p>
                 <p><Icon name="clock-fill" /> {gettime(event[0],event[1])}</p>
                 <!--/Card-->
               </AccordionItem>
