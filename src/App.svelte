@@ -23,7 +23,7 @@
       //get provinceName by levents[i][2]
       for(let j=0;j<data.length;j++){
         if(data[j].provinceName == levents[i][2]){
-          levents[i][3] = data[j].provinceName;
+          levents[i][3] = data[j].sealUrl;
           break;
         }
       }
