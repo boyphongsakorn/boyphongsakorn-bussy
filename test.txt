@@ -1,0 +1,22 @@
+{#if getoutoldevents(events).length==0}
+          <Card body><p class="mb-0">ยังไม่มีตารางงานของ {name}</p></Card>
+        {/if}
+        {#each getoutoldevents(events) as event, i}
+          {#if i == 0}
+            <AccordionItem active header="{getthaiformat(event[0])} - {event[2]}">
+              <!--Card body-->
+              <p><Icon name="calendar-event" /> {getthaiformat(event[0])}</p>
+              <p><Icon name="shield-fill" /> {event[2]}</p>
+              <p><Icon name="clock-fill" /> {gettime(event[0],event[1])}</p>
+              <!--/Card-->
+            </AccordionItem>
+          {:else}
+            <AccordionItem header="{getthaiformat(event[0])} - {event[2]}">
+              <!--Card body-->
+              <p><Icon name="calendar-event" /> {getthaiformat(event[0])}</p>
+              <p><Icon name="shield-fill" /> {event[2]}</p>
+              <p><Icon name="clock-fill" /> {gettime(event[0],event[1])}</p>
+              <!--/Card-->
+            </AccordionItem>
+          {/if}
+        {/each}

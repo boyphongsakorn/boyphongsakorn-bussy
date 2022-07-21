@@ -9,7 +9,7 @@
   console.log(window.location.hostname)
   let events = [['07-09-2022 09:00','07-09-2022 17:00','ในเมือง ขอนแก่น']]
   let imgsplist = ['https://res.cloudinary.com/dstnfzzu4/image/upload/v1602160097/teamquadb/fire_lqe3xv.png','https://res.cloudinary.com/dstnfzzu4/image/upload/v1626324277/quadb_lott/two-standing-smartphones-mockup_zwf7ls.png','https://res.cloudinary.com/dstnfzzu4/image/upload/v1602162255/teamquadb/120603592_3279839782114711_727098858267587641_o_qrduk3.jpg']
-  function getoutoldevents(levents){
+  async function getoutoldevents(levents){
     let now = new Date();
     let nowtime = now.getTime();
     let eventlist = [];
@@ -18,6 +18,15 @@
       let end = new Date(levents[i][1]);
       let starttime = start.getTime();
       let endtime = end.getTime();
+      let response = await fetch("https://province-thai-api.vercel.app");
+      let data = await response.json();
+      //get provinceName by levents[i][2]
+      for(let j=0;j<data.length;j++){
+        if(data[j].provinceName == levents[i][2]){
+          levents[i][3] = data[j].provinceName;
+          break;
+        }
+      }
       if(nowtime<=starttime || nowtime<=endtime){
         eventlist.push(levents[i]);
       }
@@ -99,28 +108,34 @@
       <Card class="mb-1" body><center><h2>ตารางงานของ {name}</h2></center></Card>
       <!--Card body><p class="mb-0"><Icon name="info-square-fill" /> ยังไม่มีตารางงานของ {name}</p></Card-->
       <Accordion class="mb-1">
-        {#if getoutoldevents(events).length==0}
-          <Card body><p class="mb-0">ยังไม่มีตารางงานของ {name}</p></Card>
-        {/if}
-        {#each getoutoldevents(events) as event, i}
-          {#if i == 0}
-            <AccordionItem active header="{getthaiformat(event[0])} - {event[2]}">
-              <!--Card body-->
-              <p><Icon name="calendar-event" /> {getthaiformat(event[0])}</p>
-              <p><Icon name="shield-fill" /> {event[2]}</p>
-              <p><Icon name="clock-fill" /> {gettime(event[0],event[1])}</p>
-              <!--/Card-->
-            </AccordionItem>
-          {:else}
-            <AccordionItem header="{getthaiformat(event[0])} - {event[2]}">
-              <!--Card body-->
-              <p><Icon name="calendar-event" /> {getthaiformat(event[0])}</p>
-              <p><Icon name="shield-fill" /> {event[2]}</p>
-              <p><Icon name="clock-fill" /> {gettime(event[0],event[1])}</p>
-              <!--/Card-->
-            </AccordionItem>
-          {/if}
-        {/each}
+        {#await getoutoldevents(events)}
+          <Card body><p class="mb-0">Loading......</p></Card>
+        {:then list}
+          {#each list as event, i}
+            {#if list.length==0}
+              <Card body><p class="mb-0">ยังไม่มีตารางงานของ {name}</p></Card>
+            {/if}
+            {#if i == 0}
+              <AccordionItem active header="{getthaiformat(event[0])} - {event[2]}">
+                <!--Card body-->
+                <p><Icon name="calendar-event" /> {getthaiformat(event[0])}</p>
+                <p><Icon name="shield-fill" /> {event[2]}</p>
+                <p><Icon name="clock-fill" /> {gettime(event[0],event[1])}</p>
+                <!--/Card-->
+              </AccordionItem>
+            {:else}
+              <AccordionItem header="{getthaiformat(event[0])} - {event[2]}">
+                <!--Card body-->
+                <p><Icon name="calendar-event" /> {getthaiformat(event[0])}</p>
+                <p><Icon name="shield-fill" /> {event[2]}</p>
+                <p><Icon name="clock-fill" /> {gettime(event[0],event[1])}</p>
+                <!--/Card-->
+              </AccordionItem>
+            {/if}
+          {/each}
+        {:catch error}
+          <Card body><p class="mb-0">Error...... F5 For Refresh</p></Card>
+        {/await}
       </Accordion>
       {#each imgsplist as img}
       <div class="jsonArea rounded">
