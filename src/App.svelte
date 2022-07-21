@@ -18,7 +18,7 @@
       let end = new Date(levents[i][1]);
       let starttime = start.getTime();
       let endtime = end.getTime();
-      let response = await fetch("https://province-thai-api.vercel.app");
+      let response = await fetch("https://anywhere.pwisetthon.com/https://province-thai-api.vercel.app");
       let data = await response.json();
       //get provinceName by levents[i][2]
       for(let j=0;j<data.length;j++){
