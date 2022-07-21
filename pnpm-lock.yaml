@@ -3,10 +3,12 @@ lockfileVersion: 5.4
 specifiers:
   '@sveltejs/vite-plugin-svelte': ^1.0.0-next.30
   svelte: ^3.48.0
+  svelte-avatar: ^1.1.1
   sveltestrap: ^5.9.0
   vite: ^2.9.9
 
 dependencies:
+  svelte-avatar: 1.1.1
   sveltestrap: 5.9.0_svelte@3.48.0
 
 devDependencies:
@@ -299,6 +301,10 @@ packages:
       function-bind: 1.1.1
     dev: true
 
+  /initials/3.1.1:
+    resolution: {integrity: sha512-imRkwIpCUer+w9NB41dTENhJrTQTGOJthRa3URF0O9+L7MOMBPmN8njwkiX4u8YnzxbjEp4Is0ohiW6NSA8ZCw==}
+    dev: false
+
   /is-core-module/2.9.0:
     resolution: {integrity: sha512-+5FPy5PnwmO3lvfMb0AsoPaBG+5KHUI0wYFXOtYPnVVVspTFUuMZNfNaNVRt3FZadstu2c8x23vykRW/NBoU6A==}
     dependencies:
@@ -379,6 +385,12 @@ packages:
     resolution: {integrity: sha512-ot0WnXS9fgdkgIcePe6RHNk1WA8+muPa6cSjeR3V8K27q9BB1rTE3R1p7Hv0z1ZyAc8s6Vvv8DIyWf681MAt0w==}
     engines: {node: '>= 0.4'}
     dev: true
+
+  /svelte-avatar/1.1.1:
+    resolution: {integrity: sha512-fmiWk6O/WJxYXexKmISeOpwshU3DmTtQnIQAt86PLojsAoHMgr312nL9g0w90dgkju+4gWlP2V+E/i9DgDRPhg==}
+    dependencies:
+      initials: 3.1.1
+    dev: false
 
   /svelte-hmr/0.14.12_svelte@3.48.0:
     resolution: {integrity: sha512-4QSW/VvXuqVcFZ+RhxiR8/newmwOCTlbYIezvkeN6302YFRE8cXy0naamHcjz8Y9Ce3ITTZtrHrIL0AGfyo61w==}

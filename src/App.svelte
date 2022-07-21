@@ -1,5 +1,6 @@
 <script>
   import { Styles,Card,Row,Col,Icon,Image,Container,Accordion, AccordionItem,Badge } from 'sveltestrap/src';
+  import Avatar from "svelte-avatar";
   let name = ''
   if(window.location.hostname.includes('pwisetthon')){
     name = 'พงศกร วิเศษธร (บอย)';
@@ -119,7 +120,7 @@
               <AccordionItem active header="{getthaiformat(event[0])} - {event[2]}">
                 <!--Card body-->
                 <p><Icon name="calendar-event" /> {getthaiformat(event[0])}</p>
-                <p><img src={event[3]}> {event[2]}</p>
+                <p><Avatar name="John Walker" src={event[3]} /> {event[2]}</p>
                 <p><Icon name="clock-fill" /> {gettime(event[0],event[1])}</p>
                 <!--/Card-->
               </AccordionItem>
