@@ -8,7 +8,7 @@
     name = 'บริษัท ทีมควอดบี จำกัด';
   }
   console.log(window.location.hostname)
-  let events = [['07-09-2022 09:00','07-09-2022 17:00','ในเมือง ขอนแก่น'],['07-31-2022 18:00','08-06-2022 18:00','นนทบุรี']]
+  let events = [['07-09-2022 09:00','07-09-2022 17:00','ขอนแก่น'],['07-31-2022 18:00','08-06-2022 18:00','นนทบุรี']]
   let imgsplist = ['https://res.cloudinary.com/dstnfzzu4/image/upload/v1602160097/teamquadb/fire_lqe3xv.png','https://res.cloudinary.com/dstnfzzu4/image/upload/v1626324277/quadb_lott/two-standing-smartphones-mockup_zwf7ls.png','https://res.cloudinary.com/dstnfzzu4/image/upload/v1602162255/teamquadb/120603592_3279839782114711_727098858267587641_o_qrduk3.jpg']
   async function getoutoldevents(levents){
     let now = new Date();
@@ -29,6 +29,30 @@
         }
       }
       if(nowtime<=starttime || nowtime<=endtime){
+        eventlist.push(levents[i]);
+      }
+    }
+    return eventlist;
+  }
+  async function getoldevents(levents){
+    let now = new Date();
+    let nowtime = now.getTime();
+    let eventlist = [];
+    for(let i=0;i<levents.length;i++){
+      let start = new Date(levents[i][0]);
+      let end = new Date(levents[i][1]);
+      let starttime = start.getTime();
+      let endtime = end.getTime();
+      let response = await fetch("https://anywhere.pwisetthon.com/https://province-thai-api.vercel.app");
+      let data = await response.json();
+      //get provinceName by levents[i][2]
+      for(let j=0;j<data.length;j++){
+        if(data[j].provinceName == levents[i][2]){
+          levents[i][3] = data[j].sealUrl;
+          break;
+        }
+      }
+      if(nowtime>=starttime || nowtime>=endtime){
         eventlist.push(levents[i]);
       }
     }
@@ -138,12 +162,28 @@
           <Card body><p class="mb-0">Error...... F5 For Refresh</p></Card>
         {/await}
       </Accordion>
+      <Accordion class="mb-1">
+        <AccordionItem header="ตารางงานเก่า">
+          {#await getoldevents(events)}
+            <Card body><p class="mb-0">Loading......</p></Card>
+          {:then list}
+            {#each list as event, i}
+              <Card body>
+                <p><Icon name="calendar-event" /> {getthaiformat(event[0])}</p>
+                <p style="display: inline-flex;"><Avatar src={event[3]} /> {event[2]}</p>
+                <p><Icon name="clock-fill" /> {gettime(event[0],event[1])}</p>
+              </Card>
+            {/each}
+          {:catch error}
+            <Card body><p class="mb-0">Error...... F5 For Refresh</p></Card>
+          {/await}
+        </AccordionItem>
+      </Accordion>
       {#each imgsplist as img}
       <div class="jsonArea rounded">
         <div class="buttonsGroup">
           <Badge color="danger">Sponsor</Badge>
         </div>
-      
         <Image fluid alt="Landscape" src="https://img.gs/fhcphvsghs/1000x300,crop/{img}" />
       </div>
       {/each}
