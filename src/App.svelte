@@ -8,7 +8,7 @@
     name = 'บริษัท ทีมควอดบี จำกัด';
   }
   console.log(window.location.hostname)
-  let events = [['07-09-2022 09:00','07-09-2022 17:00','ขอนแก่น'],['07-31-2022 18:00','08-06-2022 18:00','นนทบุรี']]
+  let events = [['07-09-2022 09:00','07-09-2022 17:00','ขอนแก่น','goingon'],['07-31-2022 18:00','08-06-2022 18:00','นนทบุรี','cancel']]
   let imgsplist = ['https://res.cloudinary.com/dstnfzzu4/image/upload/v1602160097/teamquadb/fire_lqe3xv.png','https://res.cloudinary.com/dstnfzzu4/image/upload/v1626324277/quadb_lott/two-standing-smartphones-mockup_zwf7ls.png','https://res.cloudinary.com/dstnfzzu4/image/upload/v1602162255/teamquadb/120603592_3279839782114711_727098858267587641_o_qrduk3.jpg']
   async function getoutoldevents(levents){
     let now = new Date();
@@ -28,7 +28,7 @@
           break;
         }
       }
-      if(nowtime<=starttime || nowtime<=endtime){
+      if(nowtime<=starttime || nowtime<=endtime || levents[i][3] == 'goingon'){
         eventlist.push(levents[i]);
       }
     }
@@ -52,7 +52,7 @@
           break;
         }
       }
-      if(nowtime>=starttime || nowtime>=endtime){
+      if(nowtime>=starttime || nowtime>=endtime || levents[i][3] != 'goingon'){
         eventlist.push(levents[i]);
       }
     }
