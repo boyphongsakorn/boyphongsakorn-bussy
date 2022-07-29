@@ -28,7 +28,7 @@
           break;
         }
       }
-      if(nowtime<=starttime || nowtime<=endtime || levents[i][3] == 'goingon'){
+      if((nowtime<=starttime || nowtime<=endtime) && levents[i][3] == 'goingon'){
         eventlist.push(levents[i]);
       }
     }
@@ -52,7 +52,7 @@
           break;
         }
       }
-      if(nowtime>=starttime || nowtime>=endtime || levents[i][3] != 'goingon'){
+      if((nowtime>=starttime || nowtime>=endtime) && levents[i][3] != 'goingon'){
         eventlist.push(levents[i]);
       }
     }
