@@ -24,11 +24,13 @@
       //get provinceName by levents[i][2]
       for(let j=0;j<data.length;j++){
         if(data[j].provinceName == levents[i][2]){
-          levents[i][3] = data[j].sealUrl;
+          levents[i][5] = data[j].sealUrl;
           break;
         }
       }
-      if((nowtime<=starttime || nowtime<=endtime) && levents[i][3] == 'goingon'){
+      console.log(nowtime)
+      console.log(endtime)
+      if(nowtime<=endtime && levents[i][3] == 'goingon'){
         eventlist.push(levents[i]);
       }
     }
@@ -48,7 +50,7 @@
       //get provinceName by levents[i][2]
       for(let j=0;j<data.length;j++){
         if(data[j].provinceName == levents[i][2]){
-          levents[i][3] = data[j].sealUrl;
+          levents[i][5] = data[j].sealUrl;
           break;
         }
       }
@@ -144,7 +146,7 @@
               <AccordionItem active header="{getthaiformat(event[0])} - {event[2]}">
                 <!--Card body-->
                 <p><Icon name="calendar-event" /> {getthaiformat(event[0])}</p>
-                <p style="display: inline-flex;"><Avatar src={event[3]} /> {event[2]}</p>
+                <p style="display: inline-flex;"><Avatar src={event[5]} /> {event[2]}</p>
                 <p><Icon name="clock-fill" /> {gettime(event[0],event[1])}</p>
                 <!--/Card-->
               </AccordionItem>
@@ -152,7 +154,7 @@
               <AccordionItem header="{getthaiformat(event[0])} - {event[2]}">
                 <!--Card body-->
                 <p><Icon name="calendar-event" /> {getthaiformat(event[0])}</p>
-                <p style="display: inline-flex;"><Avatar src={event[3]} /> {event[2]}</p>
+                <p style="display: inline-flex;"><Avatar src={event[5]} /> {event[2]}</p>
                 <p><Icon name="clock-fill" /> {gettime(event[0],event[1])}</p>
                 <!--/Card-->
               </AccordionItem>
@@ -170,7 +172,7 @@
             {#each list as event, i}
               <Card body>
                 <p><Icon name="calendar-event" /> {getthaiformat(event[0])}</p>
-                <p style="display: inline-flex;"><Avatar src={event[3]} /> {event[2]}</p>
+                <p style="display: inline-flex;"><Avatar src={event[5]} /> {event[2]}</p>
                 <p><Icon name="clock-fill" /> {gettime(event[0],event[1])}</p>
               </Card>
             {/each}
