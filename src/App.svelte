@@ -30,7 +30,7 @@
       }
       console.log(nowtime)
       console.log(endtime)
-      if(nowtime<=endtime && levents[i][3] == 'goingon'){
+      if((nowtime<=starttime || nowtime<=endtime) && levents[i][3] == 'goingon'){
         eventlist.push(levents[i]);
       }
     }
@@ -143,7 +143,7 @@
               <Card body><p class="mb-0">ยังไม่มีตารางงานของ {name}</p></Card>
             {/if}
             {#if i == 0}
-              <AccordionItem active header="{getthaiformat(event[0])} - {event[2]}">
+              <AccordionItem active header="{getthaiformat(event[0])} - {event[2]} <Badge color='danger'>danger</Badge>">
                 <!--Card body-->
                 <p><Icon name="calendar-event" /> {getthaiformat(event[0])}</p>
                 <p style="display: inline-flex;"><Avatar src={event[5]} /> {event[2]}</p>
