@@ -135,6 +135,13 @@
       <Card class="mb-1" body><center><h2>ตารางงานของ {name}</h2></center></Card>
       <!--Card body><p class="mb-0"><Icon name="info-square-fill" /> ยังไม่มีตารางงานของ {name}</p></Card-->
       <Accordion class="mb-1">
+        <AccordionItem active header="งานประจำ วันจันทร์ถึงศุกร์">
+          <!--Card body-->
+          <p><Icon name="calendar-event" /> วันจันทร์ถึงศุกร์</p>
+          <p style="display: inline-flex;"><Avatar src="https://www.m-culture.go.th/khonkaen/images/Khonkaen2016/khonkaenLogo.png" /> บ้าน</p>
+          <p><Icon name="clock-fill" /> เวลา 09:00 ถึง 18:00</p>
+          <!--/Card-->
+        </AccordionItem>
         {#await getoutoldevents(events)}
           <Card body><p class="mb-0">Loading......</p></Card>
         {:then list}
