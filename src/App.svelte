@@ -150,7 +150,7 @@
               <Card body><p class="mb-0">ยังไม่มีตารางงานของ {name}</p></Card>
             {/if}
             {#if i == 0}
-              <AccordionItem active header="{getthaiformat(event[0])} - {event[2]}">
+              <AccordionItem header="{getthaiformat(event[0])} - {event[2]}">
                 <!--Card body-->
                 <p><Icon name="calendar-event" /> {getthaiformat(event[0])}</p>
                 <p style="display: inline-flex;"><Avatar src={event[5]} /> {event[2]}</p>
