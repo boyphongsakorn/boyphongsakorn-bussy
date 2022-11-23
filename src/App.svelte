@@ -1,5 +1,5 @@
 <script>
-  import { Styles,Card,Row,Col,Icon,Image,Container,Accordion, AccordionItem,Badge } from 'sveltestrap/src';
+  import { Styles,Card,Row,Col,Icon,Image,Container,Accordion,AccordionItem,Badge,Button } from 'sveltestrap/src';
   import Avatar from "svelte-avatar";
   let name = ''
   if(window.location.hostname.includes('pwisetthon')){
@@ -143,7 +143,7 @@
           <!--/Card-->
         </AccordionItem>
         {#await getoutoldevents(events)}
-          <Card body><p class="mb-0">Loading......</p></Card>
+          <Card body><p class="mb-0">กำลังโหลด......</p></Card>
         {:then list}
           {#each list as event, i}
             {#if list.length==0}
@@ -174,7 +174,7 @@
       <Accordion class="mb-1">
         <AccordionItem header="ตารางงานเก่า">
           {#await getoldevents(events)}
-            <Card body><p class="mb-0">Loading......</p></Card>
+            <Card body><p class="mb-0">กำลังโหลด......</p></Card>
           {:then list}
             {#each list as event, i}
               <Card body>
@@ -188,6 +188,7 @@
           {/await}
         </AccordionItem>
       </Accordion>
+      <a href="https://boyphongsakorn-book.vercel.app"><Button block>จองคิว/จองเวลา</Button></a>
       {#each imgsplist as img}
       <div class="jsonArea rounded">
         <div class="buttonsGroup">
