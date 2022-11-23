@@ -134,6 +134,7 @@
     <Col sm="12" md={{ size: 6, offset: 3 }}>
       <Card class="mb-1" body><center><h2>ตารางงานของ {name}</h2></center></Card>
       <!--Card body><p class="mb-0"><Icon name="info-square-fill" /> ยังไม่มีตารางงานของ {name}</p></Card-->
+      <a href="https://boyphongsakorn-book.vercel.app" class="text-decoration-none mb-1"><Button block>จองคิว/จองเวลา</Button></a>
       <Accordion class="mb-1">
         <AccordionItem active header="งานประจำ วันจันทร์ถึงศุกร์">
           <!--Card body-->
@@ -188,7 +189,6 @@
           {/await}
         </AccordionItem>
       </Accordion>
-      <a href="https://boyphongsakorn-book.vercel.app" class="text-decoration-none mb-1"><Button block>จองคิว/จองเวลา</Button></a>
       {#each imgsplist as img}
       <div class="jsonArea rounded">
         <div class="buttonsGroup">
