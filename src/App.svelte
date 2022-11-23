@@ -188,7 +188,7 @@
           {/await}
         </AccordionItem>
       </Accordion>
-      <a href="https://boyphongsakorn-book.vercel.app" class="text-decoration-none"><Button block>จองคิว/จองเวลา</Button></a>
+      <a href="https://boyphongsakorn-book.vercel.app" class="text-decoration-none mb-1"><Button block>จองคิว/จองเวลา</Button></a>
       {#each imgsplist as img}
       <div class="jsonArea rounded">
         <div class="buttonsGroup">
