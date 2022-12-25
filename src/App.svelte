@@ -33,7 +33,7 @@
         levents[i][5] = 'https://img.gs/fhcphvsghs/120x120,crop/https://www.phuket.go.th/webpk/images/introduce/logo-phuket2565.jpg'
       }
       if(levents[i][2] == 'นนทบุรี'){
-        levents[i][5] = 'https://img.gs/fhcphvsghs/100x120,crop/https://www.thebestcenter.com/wp-content/uploads/2021/07/logo210702063101.png'
+        levents[i][5] = 'https://img.gs/fhcphvsghs/99x120,crop/https://www.thebestcenter.com/wp-content/uploads/2021/07/logo210702063101.png'
       }
       console.log(nowtime)
       console.log(endtime)
