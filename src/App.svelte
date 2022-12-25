@@ -19,14 +19,21 @@
       let end = new Date(levents[i][1]);
       let starttime = start.getTime();
       let endtime = end.getTime();
-      let response = await fetch("https://anywhere.pwisetthon.com/https://province-thai-api.vercel.app");
-      let data = await response.json();
+      //let response = await fetch("https://anywhere.pwisetthon.com/https://province-thai-api.vercel.app");
+      //let data = await response.json();
       //get provinceName by levents[i][2]
-      for(let j=0;j<data.length;j++){
-        if(data[j].provinceName == levents[i][2]){
-          levents[i][5] = data[j].sealUrl;
-          break;
-        }
+      //for(let j=0;j<data.length;j++){
+      //  if(data[j].provinceName == levents[i][2]){
+      //    levents[i][5] = data[j].sealUrl;
+      //    break;
+      //  }
+      //}
+      //if levents[i][2] == 'นนทบุรี' then levents[i][5] = 'https://img.gs/fhcphvsghs/120x120,crop/https://www.phuket.go.th/webpk/images/introduce/logo-phuket2565.jpg'
+      if(levents[i][2] == 'ภูเก็ต'){
+        levents[i][5] = 'https://img.gs/fhcphvsghs/120x120,crop/https://www.phuket.go.th/webpk/images/introduce/logo-phuket2565.jpg'
+      }
+      if(levents[i][2] == 'นนทบุรี'){
+        levents[i][5] = 'https://img.gs/fhcphvsghs/100x120,crop/https://www.thebestcenter.com/wp-content/uploads/2021/07/logo210702063101.png'
       }
       console.log(nowtime)
       console.log(endtime)
