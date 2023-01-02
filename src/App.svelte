@@ -35,6 +35,9 @@
       if(levents[i][2] == 'นนทบุรี'){
         levents[i][5] = 'https://img.gs/fhcphvsghs/99x120,crop/https://www.thebestcenter.com/wp-content/uploads/2021/07/logo210702063101.png'
       }
+      if(levents[i][2] == 'ขอนแก่น'){
+        levents[i][5] = 'https://www.m-culture.go.th/khonkaen/images/Khonkaen2016/khonkaenLogo.png'
+      }
       console.log(nowtime)
       console.log(endtime)
       if((nowtime<=starttime || nowtime<=endtime) && levents[i][3] == 'goingon'){
