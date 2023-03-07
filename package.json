@@ -9,10 +9,10 @@
     "preview": "vite preview"
   },
   "devDependencies": {
-    "@sveltejs/vite-plugin-svelte": "^1.3.0",
+    "@sveltejs/vite-plugin-svelte": "^1.4.0",
     "@tsconfig/svelte": "^3.0.0",
-    "svelte": "^3.53.1",
-    "vite": "^3.2.4"
+    "svelte": "^3.55.1",
+    "vite": "^3.2.5"
   },
   "dependencies": {
     "svelte-avatar": "^1.2.0",
