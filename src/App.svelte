@@ -69,7 +69,7 @@
       let startb = new Date(b[0]);
       let startatime = starta.getTime();
       let startbtime = startb.getTime();
-      return startatime - startbtime;
+      return startbtime - startatime;
     })
     for(let i=0;i<levents.length;i++){
       let start = new Date(levents[i][0]);
