@@ -63,6 +63,14 @@
     let now = new Date();
     let nowtime = now.getTime();
     let eventlist = [];
+    //reoder levents by start time
+    levents.sort(function(a,b){
+      let starta = new Date(a[0]);
+      let startb = new Date(b[0]);
+      let startatime = starta.getTime();
+      let startbtime = startb.getTime();
+      return startatime - startbtime;
+    })
     for(let i=0;i<levents.length;i++){
       let start = new Date(levents[i][0]);
       let end = new Date(levents[i][1]);
