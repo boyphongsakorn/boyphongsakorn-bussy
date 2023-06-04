@@ -50,7 +50,7 @@
         levents[i][5] = 'https://img.gs/fhcphvsghs/99x120,crop/https://www.thebestcenter.com/wp-content/uploads/2021/07/logo210702063101.png'
       }
       if(levents[i][2] == 'ขอนแก่น'){
-        levents[i][5] = 'https://www.m-culture.go.th/khonkaen/images/Khonkaen2016/khonkaenLogo.png'
+        levents[i][5] = 'https://www.khonkaen.go.th/khonkaen6/images/kkData/logokk.jpg'
       }
       console.log(nowtime)
       console.log(endtime)
