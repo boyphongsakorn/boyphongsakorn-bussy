@@ -25,7 +25,7 @@
     ['06-11-2023 12:00','06-17-2023 12:00','นนทบุรี','goingon'],
     ['06-17-2023 12:00','06-24-2023 12:00','นนทบุรี','goingon'],
     ['06-24-2023 12:00','07-08-2023 12:00','นนทบุรี','goingon'],
-    ['11-18-2023 09:00','11-22-2023 20:00','กรุงเทพ','goingon']
+    ['11-18-2023 09:00','11-22-2023 20:00','กรุงเทพ','goingon'],
     ['12-03-2023 11:00','12-16-2023 06:00','นนทบุรี','goingon']
   ]
   let imgsplist = ['https://res.cloudinary.com/dstnfzzu4/image/upload/v1602160097/teamquadb/fire_lqe3xv.png','https://res.cloudinary.com/dstnfzzu4/image/upload/v1626324277/quadb_lott/two-standing-smartphones-mockup_zwf7ls.png','https://res.cloudinary.com/dstnfzzu4/image/upload/v1602162255/teamquadb/120603592_3279839782114711_727098858267587641_o_qrduk3.jpg']
