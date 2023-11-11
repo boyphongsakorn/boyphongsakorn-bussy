@@ -179,7 +179,7 @@
         <AccordionItem active header="งานประจำ วันจันทร์ถึงศุกร์">
           <!--Card body-->
           <p><Icon name="calendar-event" /> วันจันทร์ถึงศุกร์</p>
-          <p style="display: inline-flex;"><Avatar src="https://www.m-culture.go.th/khonkaen/images/Khonkaen2016/khonkaenLogo.png" /> บ้าน</p>
+          <p style="display: inline-flex;"><Avatar src="https://cdn-icons-png.flaticon.com/512/5973/5973800.png" /> บ้าน</p>
           <p><Icon name="clock-fill" /> เวลา 09:00 ถึง 18:00</p>
           <!--/Card-->
         </AccordionItem>
