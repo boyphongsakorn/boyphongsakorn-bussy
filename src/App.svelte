@@ -25,6 +25,7 @@
     ['06-11-2023 12:00','06-17-2023 12:00','นนทบุรี','goingon'],
     ['06-17-2023 12:00','06-24-2023 12:00','นนทบุรี','goingon'],
     ['06-24-2023 12:00','07-08-2023 12:00','นนทบุรี','goingon'],
+    ['11-18-2023 09:00','11-22-2023 20:00','กรุงเทพ','goingon']
     ['12-03-2023 11:00','12-16-2023 06:00','นนทบุรี','goingon']
   ]
   let imgsplist = ['https://res.cloudinary.com/dstnfzzu4/image/upload/v1602160097/teamquadb/fire_lqe3xv.png','https://res.cloudinary.com/dstnfzzu4/image/upload/v1626324277/quadb_lott/two-standing-smartphones-mockup_zwf7ls.png','https://res.cloudinary.com/dstnfzzu4/image/upload/v1602162255/teamquadb/120603592_3279839782114711_727098858267587641_o_qrduk3.jpg']
@@ -47,6 +48,9 @@
       //  }
       //}
       //if levents[i][2] == 'นนทบุรี' then levents[i][5] = 'https://img.gs/fhcphvsghs/120x120,crop/https://www.phuket.go.th/webpk/images/introduce/logo-phuket2565.jpg'
+      if(levents[i][2] == 'กรุงเทพ'){
+        levents[i][5] = 'https://img.gs/fhcphvsghs/120x120,crop/https://upload.wikimedia.org/wikipedia/commons/thumb/7/7b/Seal_of_Bangkok_Metro_Authority.png/2048px-Seal_of_Bangkok_Metro_Authority.png'
+      }
       if(levents[i][2] == 'ภูเก็ต'){
         levents[i][5] = 'https://img.gs/fhcphvsghs/120x120,crop/https://www.phuket.go.th/webpk/images/introduce/logo-phuket2565.jpg'
       }
@@ -54,7 +58,7 @@
         levents[i][5] = 'https://img.gs/fhcphvsghs/99x120,crop/https://www.thebestcenter.com/wp-content/uploads/2021/07/logo210702063101.png'
       }
       if(levents[i][2] == 'ขอนแก่น'){
-        levents[i][5] = 'https://www.khonkaen.go.th/khonkaen6/images/kkData/logokk.jpg'
+        levents[i][5] = 'https://img.gs/fhcphvsghs/120x120,crop/https://www.khonkaen.go.th/khonkaen6/images/kkData/logokk.jpg'
       }
       console.log(nowtime)
       console.log(endtime)
