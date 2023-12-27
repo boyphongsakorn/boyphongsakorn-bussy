@@ -41,7 +41,25 @@
     for(let i=1;i<calfromapplelist.length;i++){
       let event = calfromapplelist[i].split('\n');
       let start = event[3].split(':')[1];
+      //if start is VALUE=DATE then get after : and get index 78-65-4321 00:00
+      if(start.includes('VALUE=DATE')){
+        start = start.split(':')[1];
+        start = start.slice(6,8)+'-'+start.slice(4,6)+'-'+start.slice(0,4)+' 00:00';
+      } else if(start.includes('TZID=Asia/Bangkok')){
+        start = start.split(':')[1];
+        //convert unix (yyyymmddThhmmss) to dd-mm-yyyy hh:mm
+        start = start.slice(6,8)+'-'+start.slice(4,6)+'-'+start.slice(0,4)+' '+start.slice(9,11)+':'+start.slice(11,13);
+      }
       let end = event[1].split(':')[1];
+      //if end is VALUE=DATE then get after : and get index 78-65-4321 00:00
+      if(end.includes('VALUE=DATE')){
+        end = end.split(':')[1];
+        end = end.slice(6,8)+'-'+end.slice(4,6)+'-'+end.slice(0,4)+' 00:00';
+      } else if(end.includes('TZID=Asia/Bangkok')){
+        end = end.split(':')[1];
+        //convert unix (yyyymmddThhmmss) to dd-mm-yyyy hh:mm
+        end = end.slice(6,8)+'-'+end.slice(4,6)+'-'+end.slice(0,4)+' '+end.slice(9,11)+':'+end.slice(11,13);
+      }
       let summary = event[8].findIndex('SUMMARY') == -1 ? event[6].split(':')[1] : event[8].split(':')[1];
       levents.push([start,end,summary,'goingon']);
     }
