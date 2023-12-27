@@ -67,6 +67,14 @@
         end = end.split(':')[1];
         //convert unix (yyyymmddThhmmss) to mm-dd-yyyy hh:mm
         end = end.slice(4,6)+'-'+end.slice(6,8)+'-'+end.slice(0,4)+' '+end.slice(9,11)+':'+end.slice(11,13);
+        //cal from start to end if 1 day then end = start 23:59
+        let startdate = new Date(start);
+        let enddate = new Date(end);
+        let startdatetime = startdate.getTime();
+        let enddatetime = enddate.getTime();
+        if((enddatetime-startdatetime)/86400000 == 1){
+          end = start.slice(0,11)+'23:59';
+        }
       }
       let summary = event[8].includes('SUMMARY') ? event[8].split(':')[1] : event[7].split(':')[1];
       levents.push([start,end,summary,'goingon']);
