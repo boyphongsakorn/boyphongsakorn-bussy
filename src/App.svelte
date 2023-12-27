@@ -60,7 +60,7 @@
         //convert unix (yyyymmddThhmmss) to dd-mm-yyyy hh:mm
         end = end.slice(6,8)+'-'+end.slice(4,6)+'-'+end.slice(0,4)+' '+end.slice(9,11)+':'+end.slice(11,13);
       }
-      let summary = event[8].findIndex('SUMMARY') == -1 ? event[6].split(':')[1] : event[8].split(':')[1];
+      let summary = event[8].includes('SUMMARY') ? event[8].split(':')[1] : event[6].split(':')[1];
       levents.push([start,end,summary,'goingon']);
     }
     for(let i=0;i<levents.length;i++){
