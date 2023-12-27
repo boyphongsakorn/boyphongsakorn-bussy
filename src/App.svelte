@@ -63,6 +63,7 @@
       let summary = event[8].includes('SUMMARY') ? event[8].split(':')[1] : event[6].split(':')[1];
       levents.push([start,end,summary,'goingon']);
     }
+    console.log(levents)
     for(let i=0;i<levents.length;i++){
       let start = new Date(levents[i][0]);
       let end = new Date(levents[i][1]);
