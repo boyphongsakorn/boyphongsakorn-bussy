@@ -98,7 +98,7 @@
         eventlist.push(levents[i]);
       }
     }
-    //order by eventlist[0] start time
+    //order by eventlist[0] start time in coming will be first
     eventlist.sort(function(a,b){
       let starta = new Date(a[0]);
       let startb = new Date(b[0]);
