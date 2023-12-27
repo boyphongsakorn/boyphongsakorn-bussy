@@ -33,6 +33,18 @@
     let now = new Date();
     let nowtime = now.getTime();
     let eventlist = [];
+    let calfromapple = await fetch("https://anywhere.pwisetthon.com/https://p132-caldav.icloud.com/published/2/MTAzNzA0NDExMTMxMDM3MCr9RGds7qxF_lkSVxDFXqTqPU1HQUnSSsmFt97BXngD");
+    let calfromappletext = await calfromapple.text();
+    //split every event by BEGIN:VEVENT
+    let calfromapplelist = calfromappletext.split('BEGIN:VEVENT');
+    //push to levents by [DTSTART;,DTEND;,SUMMARY;,'goingon']
+    for(let i=1;i<calfromapplelist.length;i++){
+      let event = calfromapplelist[i].split('\n');
+      let start = event[3].split(':')[1];
+      let end = event[1].split(':')[1];
+      let summary = event[8].findIndex('SUMMARY') == -1 ? event[6].split(':')[1] : event[8].split(':')[1];
+      levents.push([start,end,summary,'goingon']);
+    }
     for(let i=0;i<levents.length;i++){
       let start = new Date(levents[i][0]);
       let end = new Date(levents[i][1]);
