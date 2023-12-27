@@ -221,7 +221,7 @@
             {/if}
           {/each}
         {:catch error}
-          <Card body><p class="mb-0">Error...... F5 For Refresh</p></Card>
+          <Card body><p class="mb-0">Error...... F5 For Refresh {error}</p></Card>
         {/await}
       </Accordion>
       <Accordion class="mb-1">
