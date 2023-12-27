@@ -55,6 +55,14 @@
       if(end.includes('VALUE=DATE')){
         end = end.split(':')[1];
         end = end.slice(4,6)+'-'+end.slice(6,8)+'-'+end.slice(0,4)+' 00:00';
+        //cal from start to end if 1 day then end = start 23:59
+        let startdate = new Date(start);
+        let enddate = new Date(end);
+        let startdatetime = startdate.getTime();
+        let enddatetime = enddate.getTime();
+        if((enddatetime-startdatetime)/86400000 == 1){
+          end = start.slice(0,11)+'23:59';
+        }
       } else if(end.includes('TZID=Asia/Bangkok')){
         end = end.split(':')[1];
         //convert unix (yyyymmddThhmmss) to mm-dd-yyyy hh:mm
@@ -104,7 +112,7 @@
       let startb = new Date(b[0]);
       let startatime = starta.getTime();
       let startbtime = startb.getTime();
-      return startatime - startbtime;
+      return startbtime - startatime;
     })
     return eventlist;
   }
