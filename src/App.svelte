@@ -120,7 +120,7 @@
       let startb = new Date(b[0]);
       let startatime = starta.getTime();
       let startbtime = startb.getTime();
-      return startbtime - startatime;
+      return startatime - startbtime;
     })
     return eventlist;
   }
