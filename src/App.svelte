@@ -98,6 +98,14 @@
         eventlist.push(levents[i]);
       }
     }
+    //order by eventlist[0] start time
+    eventlist.sort(function(a,b){
+      let starta = new Date(a[0]);
+      let startb = new Date(b[0]);
+      let startatime = starta.getTime();
+      let startbtime = startb.getTime();
+      return startatime - startbtime;
+    })
     return eventlist;
   }
   async function getoldevents(levents){
