@@ -102,7 +102,7 @@
       if(levents[i][2] == 'ภูเก็ต'){
         levents[i][5] = 'https://img.gs/fhcphvsghs/120x120,crop/https://www.phuket.go.th/webpk/images/introduce/logo-phuket2565.jpg'
       }
-      if(levents[i][2] == 'นนทบุรี' || levents[i][2] == 'เข้าบริษัท'){
+      if(levents[i][2] == 'นนทบุรี' || levents[i][2].includes('บริษัท')){
         levents[i][5] = 'https://img.gs/fhcphvsghs/99x120,crop/https://www.thebestcenter.com/wp-content/uploads/2021/07/logo210702063101.png'
       }
       if(levents[i][2] == 'ขอนแก่น'){
