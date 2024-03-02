@@ -40,79 +40,121 @@
     //push to levents by [DTSTART;,DTEND;,SUMMARY;,'goingon']
     for(let i=1;i<calfromapplelist.length;i++){
       let event = calfromapplelist[i].split('\n');
-      let start = event[4].split(';')[1];
-      //if have DESCRIPTION: and next line is don't have :
-      if(event[2].includes('DESCRIPTION:')){
-        //find line after that have :
-        for(let j=3;j<event.length;j++){
-          if(event[j].includes(':')){
-            start = event[j+2].split(';')[1];
-            break;
-          }
-        }
-      }
-      // alert(start)
-      //if start is VALUE=DATE then get after : and get index mm-dd-yyyy 00:00
-      if(start.includes('VALUE=DATE')){
-        start = start.split(':')[1];
-        start = start.slice(4,6)+'-'+start.slice(6,8)+'-'+start.slice(0,4)+' 00:00';
-      } else if(start.includes('TZID=Asia/Bangkok')){
-        start = start.split(':')[1];
-        //convert unix (yyyymmddThhmmss) to mm-dd-yyyy hh:mm
-        start = start.slice(4,6)+'-'+start.slice(6,8)+'-'+start.slice(0,4)+' '+start.slice(9,11)+':'+start.slice(11,13);
-      }
-      let end = event[2].split(';')[1];
-      //if have DESCRIPTION: and next line is don't have :
-      if(event[2].includes('DESCRIPTION:')){
-        //find line after that have :
-        for(let j=3;j<event.length;j++){
-          if(event[j].includes(':')){
-            end = event[j].split(';')[1];
-            break;
-          }
-        }
-      }
-      //if end is VALUE=DATE then get after : and get index mm-dd-yyyy 00:00
-      if(end.includes('VALUE=DATE')){
-        end = end.split(':')[1];
-        end = end.slice(4,6)+'-'+end.slice(6,8)+'-'+end.slice(0,4)+' 00:00';
-        //cal from start to end if 1 day then end = start 23:59
-        let startdate = new Date(start);
-        let enddate = new Date(end);
-        let startdatetime = startdate.getTime();
-        let enddatetime = enddate.getTime();
-        if((enddatetime-startdatetime)/86400000 == 1){
-          end = start.slice(0,11)+'23:59';
-        }
-      } else if(end.includes('TZID=Asia/Bangkok')){
-        end = end.split(':')[1];
-        //convert unix (yyyymmddThhmmss) to mm-dd-yyyy hh:mm
-        end = end.slice(4,6)+'-'+end.slice(6,8)+'-'+end.slice(0,4)+' '+end.slice(9,11)+':'+end.slice(11,13);
-        //cal from start to end if 1 day then end = start 23:59
-        let startdate = new Date(start);
-        let enddate = new Date(end);
-        let startdatetime = startdate.getTime();
-        let enddatetime = enddate.getTime();
-        if((enddatetime-startdatetime)/86400000 == 1){
-          end = start.slice(0,11)+'23:59';
-        }
-      }
-      // alert('ok1')
-      let summary = event[8].includes('SUMMARY') ? event[8].split(':')[1] : event[7].split(':')[1];
-      if(event[2].includes('DESCRIPTION:')){
-        //find line after that have :
-        for(let j=3;j<event.length;j++){
-          if(event[j].includes(':')){
-            if(event[j+8].includes('SUMMARY')){
-              summary = event[j+6].split(':')[1];
-            }else{
-              summary = event[j+5].split(':')[1];
-            }
-            break;
-          }
-        }
-      }
+      console.log(event)
+      // let start = event[4].split(';')[1];
+      // //if have DESCRIPTION: and next line is don't have :
+      // if(event[2].includes('DESCRIPTION:')){
+      //   //find line after that have :
+      //   for(let j=3;j<event.length;j++){
+      //     if(event[j].includes(':')){
+      //       start = event[j+2].split(';')[1];
+      //       break;
+      //     }
+      //   }
+      // }
+      // // alert(start)
+      // //if start is VALUE=DATE then get after : and get index mm-dd-yyyy 00:00
+      // if(start.includes('VALUE=DATE')){
+      //   start = start.split(':')[1];
+      //   start = start.slice(4,6)+'-'+start.slice(6,8)+'-'+start.slice(0,4)+' 00:00';
+      // } else if(start.includes('TZID=Asia/Bangkok')){
+      //   start = start.split(':')[1];
+      //   //convert unix (yyyymmddThhmmss) to mm-dd-yyyy hh:mm
+      //   start = start.slice(4,6)+'-'+start.slice(6,8)+'-'+start.slice(0,4)+' '+start.slice(9,11)+':'+start.slice(11,13);
+      // }
+      // let end = event[2].split(';')[1];
+      // //if have DESCRIPTION: and next line is don't have :
+      // if(event[2].includes('DESCRIPTION:')){
+      //   //find line after that have :
+      //   for(let j=3;j<event.length;j++){
+      //     if(event[j].includes(':')){
+      //       end = event[j].split(';')[1];
+      //       break;
+      //     }
+      //   }
+      // }
+      // //if end is VALUE=DATE then get after : and get index mm-dd-yyyy 00:00
+      // if(end.includes('VALUE=DATE')){
+      //   end = end.split(':')[1];
+      //   end = end.slice(4,6)+'-'+end.slice(6,8)+'-'+end.slice(0,4)+' 00:00';
+      //   //cal from start to end if 1 day then end = start 23:59
+      //   let startdate = new Date(start);
+      //   let enddate = new Date(end);
+      //   let startdatetime = startdate.getTime();
+      //   let enddatetime = enddate.getTime();
+      //   if((enddatetime-startdatetime)/86400000 == 1){
+      //     end = start.slice(0,11)+'23:59';
+      //   }
+      // } else if(end.includes('TZID=Asia/Bangkok')){
+      //   end = end.split(':')[1];
+      //   //convert unix (yyyymmddThhmmss) to mm-dd-yyyy hh:mm
+      //   end = end.slice(4,6)+'-'+end.slice(6,8)+'-'+end.slice(0,4)+' '+end.slice(9,11)+':'+end.slice(11,13);
+      //   //cal from start to end if 1 day then end = start 23:59
+      //   let startdate = new Date(start);
+      //   let enddate = new Date(end);
+      //   let startdatetime = startdate.getTime();
+      //   let enddatetime = enddate.getTime();
+      //   if((enddatetime-startdatetime)/86400000 == 1){
+      //     end = start.slice(0,11)+'23:59';
+      //   }
+      // }
+      // // alert('ok1')
+      // let summary = event[8].includes('SUMMARY') ? event[8].split(':')[1] : event[7].split(':')[1];
+      // if(event[2].includes('DESCRIPTION:')){
+      //   //find line after that have :
+      //   for(let j=3;j<event.length;j++){
+      //     if(event[j].includes(':')){
+      //       if(event[j+8].includes('SUMMARY')){
+      //         summary = event[j+6].split(':')[1];
+      //       }else{
+      //         summary = event[j+5].split(':')[1];
+      //       }
+      //       break;
+      //     }
+      //   }
+      // }
       // alert('ok2')
+      // loop event
+      let start,end,summary;
+      for(let j=0;j<event.length;j++){
+        if(event[j].includes('DTSTART;')){
+          start = event[j].split(';')[1];
+          if(start.includes('VALUE=DATE')){
+            start = start.split(':')[1];
+            start = start.slice(4,6)+'-'+start.slice(6,8)+'-'+start.slice(0,4)+' 00:00';
+          } else if(start.includes('TZID=Asia/Bangkok')){
+            start = start.split(':')[1];
+            start = start.slice(4,6)+'-'+start.slice(6,8)+'-'+start.slice(0,4)+' '+start.slice(9,11)+':'+start.slice(11,13);
+          }
+        }
+        if(event[j].includes('DTEND;')){
+          end = event[j].split(';')[1];
+          if(end.includes('VALUE=DATE')){
+            end = end.split(':')[1];
+            end = end.slice(4,6)+'-'+end.slice(6,8)+'-'+end.slice(0,4)+' 00:00';
+            let startdate = new Date(start);
+            let enddate = new Date(end);
+            let startdatetime = startdate.getTime();
+            let enddatetime = enddate.getTime();
+            if((enddatetime-startdatetime)/86400000 == 1){
+              end = start.slice(0,11)+'23:59';
+            }
+          } else if(end.includes('TZID=Asia/Bangkok')){
+            end = end.split(':')[1];
+            end = end.slice(4,6)+'-'+end.slice(6,8)+'-'+end.slice(0,4)+' '+end.slice(9,11)+':'+end.slice(11,13);
+            let startdate = new Date(start);
+            let enddate = new Date(end);
+            let startdatetime = startdate.getTime();
+            let enddatetime = enddate.getTime();
+            if((enddatetime-startdatetime)/86400000 == 1){
+              end = start.slice(0,11)+'23:59';
+            }
+          }
+        }
+        if(event[j].includes('SUMMARY')){
+          summary = event[j].split(':')[1];
+        }
+      }
       levents.push([start,end,summary,'goingon']);
     }
     console.log(levents)
