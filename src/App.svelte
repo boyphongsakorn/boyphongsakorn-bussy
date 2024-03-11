@@ -175,19 +175,19 @@
       //}
       //if levents[i][2] == 'นนทบุรี' then levents[i][5] = 'https://img.gs/fhcphvsghs/120x120,crop/https://www.phuket.go.th/webpk/images/introduce/logo-phuket2565.jpg'
       levents[i][5] = 'https://cdn-icons-png.flaticon.com/512/5973/5973800.png'
-      if(levents[i][2] == 'กรุงเทพ'){
+      if(levents[i][2].trim() == 'กรุงเทพ'){
         levents[i][5] = 'https://img.gs/fhcphvsghs/120x120,crop/https://upload.wikimedia.org/wikipedia/commons/thumb/7/7b/Seal_of_Bangkok_Metro_Authority.png/2048px-Seal_of_Bangkok_Metro_Authority.png'
       }
-      if(levents[i][2] == 'ภูเก็ต'){
+      if(levents[i][2].trim() == 'ภูเก็ต'){
         levents[i][5] = 'https://img.gs/fhcphvsghs/120x120,crop/https://www.phuket.go.th/webpk/images/introduce/logo-phuket2565.jpg'
       }
-      if(levents[i][2] == 'นนทบุรี' || levents[i][2].includes('บริษัท')){
+      if(levents[i][2].trim() == 'นนทบุรี' || levents[i][2].includes('บริษัท')){
         levents[i][5] = 'https://img.gs/fhcphvsghs/99x120,crop/https://www.thebestcenter.com/wp-content/uploads/2021/07/logo210702063101.png'
       }
-      if(levents[i][2] == 'ขอนแก่น'){
+      if(levents[i][2].trim() == 'ขอนแก่น'){
         levents[i][5] = 'https://img.gs/fhcphvsghs/120x120,crop/https://khonkaen.m-culture.go.th/web-upload/1005x9680e19a89465bf0531f017d8ef94780/tinymce/94-bfc6edecc2a4da646bd0824086ba8dea/%E0%B8%AA%E0%B8%B1%E0%B8%8D%E0%B8%A5%E0%B8%B1%E0%B8%81%E0%B8%A9%E0%B8%93%E0%B9%8C%E0%B8%9B%E0%B8%A3%E0%B8%B0%E0%B8%88%E0%B8%B3%E0%B8%88%E0%B8%B1%E0%B8%87%E0%B8%AB%E0%B8%A7%E0%B8%B1%E0%B8%94/khonkaenLogo.png'
       }
-      if(levents[i][2] == 'พัทยา'){
+      if(levents[i][2].trim() == 'พัทยา'){
         levents[i][5] = 'https://e7.pngegg.com/pngimages/419/199/png-clipart-phuket-island-computer-icons-pattaya-island-beach-text.png'
       }
       console.log(nowtime)
