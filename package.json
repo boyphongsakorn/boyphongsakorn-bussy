@@ -15,6 +15,7 @@
     "vite": "^3.2.5"
   },
   "dependencies": {
+    "@sveltestrap/sveltestrap": "^6.2.6",
     "svelte-avatar": "^1.2.0",
     "sveltestrap": "^5.10.0"
   }
