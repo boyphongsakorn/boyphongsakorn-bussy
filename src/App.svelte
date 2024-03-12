@@ -134,7 +134,7 @@
               
               let provinceapi = (await fetch("https://raw.githubusercontent.com/kongvut/thai-province-data/master/api_province.json")).json();
               let province = await provinceapi;
-              let locationbefore = location;
+              // let locationbefore = location;
               for(let k=0;k<province.length;k++){
                 if(province[k].name_en == location.trim()){
                   location = province[k].name_th;
@@ -142,7 +142,10 @@
                 }
               }
               for(let k=0;k<province.length;k++){
-                if(location.trim().includes(province[k].name_en)){
+                //remove spacebar from province[k].name_en
+                let removeSpacebar = province[k].name_en.replace(/\s/g, '');
+                // if(location.trim().includes(province[k].name_en)){
+                if(location.trim().includes(removeSpacebar)){
                   location = province[k].name_th;
                   break;
                 }
