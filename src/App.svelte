@@ -236,6 +236,10 @@
       levents[i][2] = levents[i][2].replace(/\n/g,' ');
       console.log(nowtime)
       console.log(endtime)
+      //if start time and end time is same day
+      if(nowtime<=starttime && nowtime<=endtime){
+        levents[i][7] = 'sameday';
+      }
       if((nowtime<=starttime || nowtime<=endtime) && levents[i][4] == 'goingon'){
         eventlist.push(levents[i]);
       }
@@ -373,22 +377,26 @@
               <Card body><p class="mb-0">ยังไม่มีตารางงานของ {name}</p></Card>
             {/if}
             {#if i == 0}
-              <AccordionItem header="{getthaiformat(event[0])} - {event[3]}">
-                <!--Card body-->
-                <p><Icon name="calendar-event" /> {getthaiformat(event[0])}</p>
-                <!-- <p style="display: inline-flex;"><Avatar src={event[6]} /> {event[3]}</p> -->
-                <Row class="mb-3">
-                  <Col xs="auto"><Avatar src={event[6]} /></Col>
-                  <Col>
-                    <Row>
-                      <Col xs="12">{event[2]}</Col>
-                      <Col xs="12">{event[3]}</Col>
-                    </Row>
-                  </Col>
-                </Row>
-                <p><Icon name="clock-fill" /> {gettime(event[0],event[1])}</p>
-                <!--/Card-->
-              </AccordionItem>
+              {#if event[7] == 'sameday'}
+                <Card body>{getthaiformat(event[0])} ถึง {event[1]} - {event[3]}</Card>
+              {:else}
+                <AccordionItem header="{getthaiformat(event[0])} - {event[3]}">
+                  <!--Card body-->
+                  <p><Icon name="calendar-event" /> {getthaiformat(event[0])}</p>
+                  <!-- <p style="display: inline-flex;"><Avatar src={event[6]} /> {event[3]}</p> -->
+                  <Row class="mb-3">
+                    <Col xs="auto"><Avatar src={event[6]} /></Col>
+                    <Col>
+                      <Row>
+                        <Col xs="12">{event[2]}</Col>
+                        <Col xs="12">{event[3]}</Col>
+                      </Row>
+                    </Col>
+                  </Row>
+                  <p><Icon name="clock-fill" /> {gettime(event[0],event[1])}</p>
+                  <!--/Card-->
+                </AccordionItem>
+              {/if}
             {:else}
               <AccordionItem header="{getthaiformat(event[0])} - {event[3]}">
                 <!--Card body-->
