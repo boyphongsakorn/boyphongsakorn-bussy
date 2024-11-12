@@ -378,7 +378,7 @@
             {/if}
             {#if i == 0}
               {#if event[7] == 'sameday'}
-                <Card body>{getthaiformat(event[0])} ถึง {event[1]} - {event[3]}</Card>
+                <Card body>{getthaiformat(event[0])} ถึง {getthaiformat(event[1])} - {event[3]}</Card>
               {:else}
                 <AccordionItem header="{getthaiformat(event[0])} - {event[3]}">
                   <!--Card body-->
