@@ -232,6 +232,8 @@
       if(levents[i][2].trim() == 'ชลบุรี'){
         levents[i][6] = 'https://img.gs/fhcphvsghs/120x120,crop/https://ww2.chonburi.go.th/images/content/logo/logo.png'
       }
+      //levents[i][2] replace \n to ' '
+      levents[i][2] = levents[i][2].replace(/\n/g,' ');
       console.log(nowtime)
       console.log(endtime)
       if((nowtime<=starttime || nowtime<=endtime) && levents[i][4] == 'goingon'){
