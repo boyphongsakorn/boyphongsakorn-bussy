@@ -387,7 +387,7 @@
               {#if event[7] == 'sameday'}
                 <Card body>{getthaiformat(event[0])} ถึง {gettimeformat(event[1])} - {event[3]}</Card>
               {:else}
-              <Accordion class="mb-1">
+              <Accordion>
                 <AccordionItem header="{getthaiformat(event[0])} - {event[3]}">
                   <!--Card body-->
                   <p><Icon name="calendar-event" /> {getthaiformat(event[0])}</p>
@@ -410,7 +410,7 @@
               {#if event[7] == 'sameday'}
                 <Card body>{getthaiformat(event[0])} ถึง {gettimeformat(event[1])} - {event[3]}</Card>
               {:else}
-              <Accordion class="mb-1">
+              <Accordion>
                 <AccordionItem header="{getthaiformat(event[0])} - {event[3]}">
                   <!--Card body-->
                   <p><Icon name="calendar-event" /> {getthaiformat(event[0])}</p>
@@ -434,7 +434,6 @@
         {:catch error}
           <Card body><p class="mb-0">Error...... F5 For Refresh {error}</p></Card>
         {/await}
-      
       <Accordion class="mb-1">
         <AccordionItem header="ตารางงานเก่า">
           {#await getoldevents(events)}
