@@ -375,6 +375,7 @@
           <p><Icon name="clock-fill" /> เวลา 09:00 ถึง 18:00</p>
           <!--/Card-->
         </AccordionItem>
+      </Accordion>
         {#await getoutoldevents(events)}
           <Card body><p class="mb-0">กำลังโหลด......</p></Card>
         {:then list}
@@ -386,6 +387,7 @@
               {#if event[7] == 'sameday'}
                 <Card body>{getthaiformat(event[0])} ถึง {gettimeformat(event[1])} - {event[3]}</Card>
               {:else}
+              <Accordion class="mb-1">
                 <AccordionItem header="{getthaiformat(event[0])} - {event[3]}">
                   <!--Card body-->
                   <p><Icon name="calendar-event" /> {getthaiformat(event[0])}</p>
@@ -402,11 +404,13 @@
                   <p><Icon name="clock-fill" /> {gettime(event[0],event[1])}</p>
                   <!--/Card-->
                 </AccordionItem>
+              </Accordion>
               {/if}
             {:else}
               {#if event[7] == 'sameday'}
                 <Card body>{getthaiformat(event[0])} ถึง {gettimeformat(event[1])} - {event[3]}</Card>
               {:else}
+              <Accordion class="mb-1">
                 <AccordionItem header="{getthaiformat(event[0])} - {event[3]}">
                   <!--Card body-->
                   <p><Icon name="calendar-event" /> {getthaiformat(event[0])}</p>
@@ -423,13 +427,14 @@
                   <p><Icon name="clock-fill" /> {gettime(event[0],event[1])}</p>
                   <!--/Card-->
                 </AccordionItem>
+              </Accordion>
               {/if}
             {/if}
           {/each}
         {:catch error}
           <Card body><p class="mb-0">Error...... F5 For Refresh {error}</p></Card>
         {/await}
-      </Accordion>
+      
       <Accordion class="mb-1">
         <AccordionItem header="ตารางงานเก่า">
           {#await getoldevents(events)}
