@@ -237,8 +237,10 @@
       console.log(nowtime)
       console.log(endtime)
       //if start time and end time is same day
-      if(nowtime<=starttime && nowtime<=endtime){
+      if(start.getDate() == end.getDate()){
         levents[i][7] = 'sameday';
+      } else {
+        levents[i][7] = 'notsameday';
       }
       if((nowtime<=starttime || nowtime<=endtime) && levents[i][4] == 'goingon'){
         eventlist.push(levents[i]);
