@@ -398,22 +398,26 @@
                 </AccordionItem>
               {/if}
             {:else}
-              <AccordionItem header="{getthaiformat(event[0])} - {event[3]}">
-                <!--Card body-->
-                <p><Icon name="calendar-event" /> {getthaiformat(event[0])}</p>
-                <!-- <p style="display: inline-flex;"><Avatar src={event[6]} /> {event[3]}</p> -->
-                <Row>
-                  <Col xs="auto"><Avatar src={event[6]} /></Col>
-                  <Col class="mb-3">
-                    <Row>
-                      <Col xs="12">{event[2]}</Col>
-                      <Col xs="12">{event[3]}</Col>
-                    </Row>
-                  </Col>
-                </Row>
-                <p><Icon name="clock-fill" /> {gettime(event[0],event[1])}</p>
-                <!--/Card-->
-              </AccordionItem>
+              {#if event[7] == 'sameday'}
+                <Card body>{getthaiformat(event[0])} ถึง {getthaiformat(event[1])} - {event[3]}</Card>
+              {:else}
+                <AccordionItem header="{getthaiformat(event[0])} - {event[3]}">
+                  <!--Card body-->
+                  <p><Icon name="calendar-event" /> {getthaiformat(event[0])}</p>
+                  <!-- <p style="display: inline-flex;"><Avatar src={event[6]} /> {event[3]}</p> -->
+                  <Row>
+                    <Col xs="auto"><Avatar src={event[6]} /></Col>
+                    <Col class="mb-3">
+                      <Row>
+                        <Col xs="12">{event[2]}</Col>
+                        <Col xs="12">{event[3]}</Col>
+                      </Row>
+                    </Col>
+                  </Row>
+                  <p><Icon name="clock-fill" /> {gettime(event[0],event[1])}</p>
+                  <!--/Card-->
+                </AccordionItem>
+              {/if}
             {/if}
           {/each}
         {:catch error}
