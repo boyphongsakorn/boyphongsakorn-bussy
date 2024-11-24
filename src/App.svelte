@@ -236,8 +236,11 @@
       levents[i][2] = levents[i][2].replace(/\n/g,' ');
       console.log(nowtime)
       console.log(endtime)
-      //if start time and end time is same day
-      if(start.getDate() == end.getDate()){
+      //if start time and end time is 24 hour
+      if(start.getHours() == 0 && start.getMinutes() == 0 && end.getHours() == 23 && end.getMinutes() == 59){
+        levents[i][7] = 'allday';
+        //if start time and end time is same day
+      } else if(start.getDate() == end.getDate()){
         levents[i][7] = 'sameday';
       } else {
         levents[i][7] = 'notsameday';
@@ -349,6 +352,10 @@
     let time = new Date(date);
     return 'วันที่ '+time.getDate()+' '+getmonth(time.getMonth())+' '+(time.getFullYear()+543)+' เวลา '+('0' + time.getHours()).slice(-2) + ':' + ('0' + time.getMinutes()).slice(-2);
   }
+  function getthainotimeformat(date){
+    let time = new Date(date);
+    return 'วันที่ '+time.getDate()+' '+getmonth(time.getMonth())+' '+(time.getFullYear()+543);
+  }
   function gettimeformat(date){
     let time = new Date(date);
     return ('0' + time.getHours()).slice(-2) + ':' + ('0' + time.getMinutes()).slice(-2);
@@ -384,7 +391,9 @@
               <Card body><p class="mb-0">ยังไม่มีตารางงานของ {name}</p></Card>
             {/if}
             {#if i == 0}
-              {#if event[7] == 'sameday'}
+              {#if event[7] == 'allday'}
+                <Card body>{getthainotimeformat(event[0])} - {event[3]}</Card>
+              {:else if event[7] == 'sameday'}
                 <Card body>{getthaiformat(event[0])} ถึง {gettimeformat(event[1])} - {event[3]}</Card>
               {:else}
               <Accordion>
@@ -407,7 +416,9 @@
               </Accordion>
               {/if}
             {:else}
-              {#if event[7] == 'sameday'}
+              {#if event[7] == 'allday'}
+                <Card body>{getthainotimeformat(event[0])} - {event[3]}</Card>
+              {:else if event[7] == 'sameday'}
                 <Card body>{getthaiformat(event[0])} ถึง {gettimeformat(event[1])} - {event[3]}</Card>
               {:else}
               <Accordion>
