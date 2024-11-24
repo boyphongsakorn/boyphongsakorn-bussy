@@ -237,7 +237,7 @@
       console.log(nowtime)
       console.log(endtime)
       //if start time and end time is 24 hour
-      if(start.getHours() == 0 && start.getMinutes() == 0 && end.getHours() == 23 && end.getMinutes() == 59){
+      if((start.getHours() == 0 && start.getMinutes() == 0 && end.getHours() == 23 && end.getMinutes() == 59 && start.getDate() == end.getDate()) || (start.getHours() == 0 && start.getMinutes() == 0 && end.getHours() == 0 && end.getMinutes() == 0 && start.getDate() != start.getDate()+1)){
         levents[i][7] = 'allday';
         //if start time and end time is same day
       } else if(start.getDate() == end.getDate()){
