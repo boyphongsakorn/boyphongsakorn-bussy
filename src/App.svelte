@@ -3,10 +3,10 @@
   import Avatar from "svelte-avatar";
   let name = ''
   if(window.location.hostname.includes('pwisetthon')){
-    name = 'พงศกร วิเศษธร (บอย)';
+    name = '';
   }else{
     // name = 'บริษัท ทีมควอดบี จำกัด';
-    name = 'ทีมควอดบี'
+    name = 'ของ ทีมควอดบี'
   }
   console.log(window.location.hostname)
   let events = [
@@ -371,7 +371,7 @@
 <Container>
   <Row>
     <Col sm="12" md={{ size: 6, offset: 3 }}>
-      <Card class="mb-1" body><center><h2>ตารางงานของ {name}</h2></center></Card>
+      <Card class="mb-1" body><center><h2>ตารางงาน</h2></center></Card>
       <!--Card body><p class="mb-0"><Icon name="info-square-fill" /> ยังไม่มีตารางงานของ {name}</p></Card-->
       <!-- <a href="https://boyphongsakorn-book.vercel.app" class="text-decoration-none mb-1"><Button class="mb-1" block>จองคิว/จองเวลา</Button></a> -->
       <Accordion class="mb-1">
