@@ -132,7 +132,7 @@
             }else{
               location = event[j].split(':')[1];
               
-              let provinceapi = (await fetch("https://raw.githubusercontent.com/kongvut/thai-province-data/master/api_province.json")).json();
+              let provinceapi = (await fetch("https://raw.githubusercontent.com/kongvut/thai-province-data/refs/heads/master/api/latest/province.json")).json();
               let province = await provinceapi;
               // let locationbefore = location;
               for(let k=0;k<province.length;k++){
