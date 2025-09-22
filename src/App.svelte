@@ -215,10 +215,10 @@
       //if levents[i][2] == 'นนทบุรี' then levents[i][5] = 'https://img.gs/fhcphvsghs/120x120,crop/https://www.phuket.go.th/webpk/images/introduce/logo-phuket2565.jpg'
       levents[i][6] = 'https://cdn-icons-png.flaticon.com/512/5973/5973800.png'
       if(levents[i][2].trim() == 'นนทบุรี' || levents[i][3].includes('บริษัท')){
-        levents[i][6] = 'https://gdcatalog.go.th/assets/images/76province/NBI.png'
+        levents[i][6] = 'https://img.gs/fhcphvsghs/120x120,crop/https://gdcatalog.go.th/assets/images/76province/NBI.png'
       }
       if(levents[i][2].trim() == 'พัทยา' || levents[i][3].includes('พัทยา')){
-        levents[i][6] = 'https://upload.wikimedia.org/wikipedia/commons/6/64/Pattaya_seal.png'
+        levents[i][6] = 'https://img.gs/fhcphvsghs/120x120,crop/https://upload.wikimedia.org/wikipedia/commons/6/64/Pattaya_seal.png'
       }
       if(levents[i][2].trim() == 'กรุงเทพ'){
         levents[i][6] = 'https://img.gs/fhcphvsghs/120x120,crop/https://upload.wikimedia.org/wikipedia/commons/thumb/7/7b/Seal_of_Bangkok_Metro_Authority.png/2048px-Seal_of_Bangkok_Metro_Authority.png'
