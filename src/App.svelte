@@ -365,7 +365,7 @@
 <Styles />
 
 <svelte:head>
-  <title>ตารางงานของ {name}</title>
+  <title>ตารางงาน {name}</title>
 </svelte:head>
 
 <Container>
