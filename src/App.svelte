@@ -257,6 +257,15 @@
       let startbtime = startb.getTime();
       return startatime - startbtime;
     })
+    //remove duplicate event by event[0] and event[3]
+    let uniqueEvent = [];
+    eventlist.forEach(event => {
+      if(!uniqueEvent.some(e => e[0] === event[0] && e[3] === event[3])){
+        uniqueEvent.push(event);
+      }
+    });
+    eventlist = uniqueEvent;
+    console.log(eventlist);
     return eventlist;
   }
   async function getoldevents(levents){
@@ -360,6 +369,16 @@
     let time = new Date(date);
     return ('0' + time.getHours()).slice(-2) + ':' + ('0' + time.getMinutes()).slice(-2);
   }
+
+  let filterApplied = false;
+  function filterWithLocation(){
+    if(filterApplied) {
+      window.location.reload();
+    }
+    let filtered = events.filter(event => event[2].trim() !== '');
+    events = filtered;
+    filterApplied = true;
+  }
 </script>
 
 <Styles />
@@ -447,6 +466,7 @@
         {/await}
       <Accordion class="mb-1">
         <AccordionItem header="ตารางงานเก่า">
+          <Button class="mb-3" color="primary" on:click={filterWithLocation}>เอาเฉพาะที่มีที่อยู่</Button>
           {#await getoldevents(events)}
             <Card body><p class="mb-0">กำลังโหลด......</p></Card>
           {:then list}
