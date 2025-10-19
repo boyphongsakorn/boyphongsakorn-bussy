@@ -29,7 +29,16 @@
     ['11-18-2023 09:00','11-22-2023 20:00','กรุงเทพ','กรุงเทพ','goingon'],
     ['12-03-2023 11:00','12-16-2023 06:00','นนทบุรี','นนทบุรี','goingon']
   ]
-  let imgsplist = ['https://imgul.teamquadb.in.th/images/2024/03/12/image.md.png','https://res.cloudinary.com/dstnfzzu4/image/upload/v1626324277/quadb_lott/two-standing-smartphones-mockup_zwf7ls.png','https://res.cloudinary.com/dstnfzzu4/image/upload/v1602162255/teamquadb/120603592_3279839782114711_727098858267587641_o_qrduk3.jpg']
+  let imgsplist = [{
+    img: 'https://imgul.teamquadb.in.th/images/2024/03/12/image.md.png',
+    link : 'https://teamquadb.in.th/services/mobile-app-development'
+  },{
+    img: 'https://res.cloudinary.com/dstnfzzu4/image/upload/v1626324277/quadb_lott/two-standing-smartphones-mockup_zwf7ls.png',
+    link : 'https://lotpost.teamquadb.in.th'
+  },{
+    img: 'https://res.cloudinary.com/dstnfzzu4/image/upload/v1602162255/teamquadb/120603592_3279839782114711_727098858267587641_o_qrduk3.jpg',
+    link : 'https://lin.ee/PPsTUIX'
+  }]
   async function getoutoldevents(levents){
     let now = new Date();
     let nowtime = now.getTime();
@@ -496,7 +505,9 @@
         <div class="buttonsGroup">
           <Badge color="danger">Sponsor</Badge>
         </div>
-        <Image fluid alt="Landscape" src="https://img.gs/fhcphvsghs/1000x300,crop/{img}" />
+        <a href={img.link} target="_blank" rel="noopener noreferrer">
+          <Image fluid alt="Landscape" src="https://img.gs/fhcphvsghs/1000x300,crop/{img.img}" />
+        </a>
       </div>
       {/each}
       <!--div style="position: relative;">
