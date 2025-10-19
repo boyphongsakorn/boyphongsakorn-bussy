@@ -466,7 +466,7 @@
         {/await}
       <Accordion class="mb-1">
         <AccordionItem header="ตารางงานเก่า">
-          <Button class="mb-3" color="primary" on:click={filterWithLocation}>เอาเฉพาะที่มีที่อยู่</Button>
+          <Button class="mb-3" color="primary" on:click={filterWithLocation} size="sm">เอาเฉพาะที่มีที่อยู่</Button>
           {#await getoldevents(events)}
             <Card body><p class="mb-0">กำลังโหลด......</p></Card>
           {:then list}
