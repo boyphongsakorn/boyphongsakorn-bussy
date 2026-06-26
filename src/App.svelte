@@ -425,7 +425,7 @@
                 <Card body>{getthaiformat(event[0])} ถึง {gettimeformat(event[1])} - {event[3]}</Card>
               {:else}
               <Accordion>
-                <AccordionItem header="{getthaiformat(event[0])} - {event[3]}">
+                <AccordionItem class="apple-calendar-accordion" header="{getthaiformat(event[0])} - {event[3]}">
                   <!--Card body-->
                   <p><Icon name="calendar-event" /> {getthaiformat(event[0])}</p>
                   <!-- <p style="display: inline-flex;"><Avatar src={event[6]} /> {event[3]}</p> -->
@@ -450,7 +450,7 @@
                 <Card body>{getthaiformat(event[0])} ถึง {gettimeformat(event[1])} - {event[3]}</Card>
               {:else}
               <Accordion>
-                <AccordionItem header="{getthaiformat(event[0])} - {event[3]}">
+                <AccordionItem class="apple-calendar-accordion" header="{getthaiformat(event[0])} - {event[3]}">
                   <!--Card body-->
                   <p><Icon name="calendar-event" /> {getthaiformat(event[0])}</p>
                   <!-- <p style="display: inline-flex;"><Avatar src={event[6]} /> {event[3]}</p> -->
@@ -480,7 +480,7 @@
             <Card body><p class="mb-0">กำลังโหลด......</p></Card>
           {:then list}
             {#each list as event, i}
-              <Card body>
+              <Card body class="apple-calendar-card">
                 <p><Icon name="calendar-event" /> {getthaiformat(event[0])}</p>
                 <!-- <p style="display: inline-flex;"><Avatar src={event[6]} /> {event[3]}</p> -->
                 <Row>
@@ -539,5 +539,22 @@
   background-color: #eeeeee;
   /*border-radius: 10px;
   -webkit-box-shadow: inset 0 0 12px rgba(0, 0, 0, 0.1);*/
+}
+
+:global(.apple-calendar-accordion .accordion-item) {
+  border-top: 4px solid #007aff !important;
+  border-radius: 0.5rem;
+  overflow: hidden;
+}
+
+:global(.apple-calendar-accordion .accordion-button) {
+  background: transparent;
+}
+
+:global(.apple-calendar-card) {
+  border-top: 4px solid #007aff !important;
+  border-radius: 0.5rem;
+  overflow: hidden;
+  background: transparent;
 }
 </style>
