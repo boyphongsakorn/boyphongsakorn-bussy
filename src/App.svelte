@@ -9,6 +9,26 @@
     name = 'ของ ทีมควอดบี'
   }
   console.log(window.location.hostname)
+  const calendarFeeds = [
+    {
+      url: 'https://p132-caldav.icloud.com/published/2/MTAzNzA0NDExMTMxMDM3MCr9RGds7qxF_lkSVxDFXqTqPU1HQUnSSsmFt97BXngD',
+      type: 'default'
+    },
+    {
+      url: 'webcal://p132-caldav.icloud.com/published/2/MTAzNzA0NDExMTMxMDM3MCr9RGds7qxF_lkSVxDFXqQCV4Q4ex1hTNj_1TWdSrJP',
+      type: 'other'
+    }
+  ];
+  function getCalendarFetchUrl(url) {
+    const normalizedUrl = url.replace(/^webcal:\/\//i, 'https://').replace(/^https?:\/\//i, '');
+    return `https://cors-fany.vercel.app/${normalizedUrl}`;
+  }
+  function getEventCardClass(event) {
+    return event[8] === 'other' ? 'other-calendar-card' : 'apple-calendar-card';
+  }
+  function getEventAccordionClass(event) {
+    return event[8] === 'other' ? 'other-calendar-accordion' : 'apple-calendar-accordion';
+  }
   let events = [
     ['07-09-2022 09:00','07-09-2022 17:00','ขอนแก่น','ขอนแก่น','cancel'],
     ['07-31-2022 18:00','08-06-2022 18:00','นนทบุรี','นนทบุรี','cancel'],
@@ -39,111 +59,20 @@
     img: 'https://res.cloudinary.com/dstnfzzu4/image/upload/v1602162255/teamquadb/120603592_3279839782114711_727098858267587641_o_qrduk3.jpg',
     link : 'https://lin.ee/PPsTUIX'
   }]
-  async function getoutoldevents(levents){
-    let now = new Date();
-    let nowtime = now.getTime();
-    let eventlist = [];
-    let calfromapple = await fetch("https://cors-fany.vercel.app/p132-caldav.icloud.com/published/2/MTAzNzA0NDExMTMxMDM3MCr9RGds7qxF_lkSVxDFXqTqPU1HQUnSSsmFt97BXngD");
-    let calfromappletext = await calfromapple.text();
-    //split every event by BEGIN:VEVENT
-    let calfromapplelist = calfromappletext.split('BEGIN:VEVENT');
-    //push to levents by [DTSTART;,DTEND;,SUMMARY;,'goingon']
+  async function parseCalendarEvents(rawText, levents, sourceType) {
+    let calfromapplelist = rawText.split('BEGIN:VEVENT');
     for(let i=1;i<calfromapplelist.length;i++){
       let event = calfromapplelist[i].split('\n');
-      // console.log(event)
-      // let start = event[4].split(';')[1];
-      // //if have DESCRIPTION: and next line is don't have :
-      // if(event[2].includes('DESCRIPTION:')){
-      //   //find line after that have :
-      //   for(let j=3;j<event.length;j++){
-      //     if(event[j].includes(':')){
-      //       start = event[j+2].split(';')[1];
-      //       break;
-      //     }
-      //   }
-      // }
-      // // alert(start)
-      // //if start is VALUE=DATE then get after : and get index mm-dd-yyyy 00:00
-      // if(start.includes('VALUE=DATE')){
-      //   start = start.split(':')[1];
-      //   start = start.slice(4,6)+'-'+start.slice(6,8)+'-'+start.slice(0,4)+' 00:00';
-      // } else if(start.includes('TZID=Asia/Bangkok')){
-      //   start = start.split(':')[1];
-      //   //convert unix (yyyymmddThhmmss) to mm-dd-yyyy hh:mm
-      //   start = start.slice(4,6)+'-'+start.slice(6,8)+'-'+start.slice(0,4)+' '+start.slice(9,11)+':'+start.slice(11,13);
-      // }
-      // let end = event[2].split(';')[1];
-      // //if have DESCRIPTION: and next line is don't have :
-      // if(event[2].includes('DESCRIPTION:')){
-      //   //find line after that have :
-      //   for(let j=3;j<event.length;j++){
-      //     if(event[j].includes(':')){
-      //       end = event[j].split(';')[1];
-      //       break;
-      //     }
-      //   }
-      // }
-      // //if end is VALUE=DATE then get after : and get index mm-dd-yyyy 00:00
-      // if(end.includes('VALUE=DATE')){
-      //   end = end.split(':')[1];
-      //   end = end.slice(4,6)+'-'+end.slice(6,8)+'-'+end.slice(0,4)+' 00:00';
-      //   //cal from start to end if 1 day then end = start 23:59
-      //   let startdate = new Date(start);
-      //   let enddate = new Date(end);
-      //   let startdatetime = startdate.getTime();
-      //   let enddatetime = enddate.getTime();
-      //   if((enddatetime-startdatetime)/86400000 == 1){
-      //     end = start.slice(0,11)+'23:59';
-      //   }
-      // } else if(end.includes('TZID=Asia/Bangkok')){
-      //   end = end.split(':')[1];
-      //   //convert unix (yyyymmddThhmmss) to mm-dd-yyyy hh:mm
-      //   end = end.slice(4,6)+'-'+end.slice(6,8)+'-'+end.slice(0,4)+' '+end.slice(9,11)+':'+end.slice(11,13);
-      //   //cal from start to end if 1 day then end = start 23:59
-      //   let startdate = new Date(start);
-      //   let enddate = new Date(end);
-      //   let startdatetime = startdate.getTime();
-      //   let enddatetime = enddate.getTime();
-      //   if((enddatetime-startdatetime)/86400000 == 1){
-      //     end = start.slice(0,11)+'23:59';
-      //   }
-      // }
-      // // alert('ok1')
-      // let summary = event[8].includes('SUMMARY') ? event[8].split(':')[1] : event[7].split(':')[1];
-      // if(event[2].includes('DESCRIPTION:')){
-      //   //find line after that have :
-      //   for(let j=3;j<event.length;j++){
-      //     if(event[j].includes(':')){
-      //       if(event[j+8].includes('SUMMARY')){
-      //         summary = event[j+6].split(':')[1];
-      //       }else{
-      //         summary = event[j+5].split(':')[1];
-      //       }
-      //       break;
-      //     }
-      //   }
-      // }
-      // alert('ok2')
-      // loop event
       let start,end,summary,location;
       for(let j=0;j<event.length;j++){
         if(event[j].includes('LOCATION')){
-          // location = event[j].split(':')[1];
-          // if start with https:// then location = ''
-          // if(event[j].split(':')[1].includes('https://')){
-          //   location = '';
-          // }else{
-            // location = event[j].split(':')[1];
-          // }
           if(event[j].includes(':')) {
             if(event[j].split(':')[1].includes('https')){
               location = '';
             }else{
               location = event[j].split(':')[1];
-              
               let provinceapi = (await fetch("https://raw.githubusercontent.com/kongvut/thai-province-data/refs/heads/master/api/latest/province.json")).json();
               let province = await provinceapi;
-              // let locationbefore = location;
               for(let k=0;k<province.length;k++){
                 if(province[k].name_en == location.trim()){
                   location = province[k].name_th;
@@ -151,9 +80,7 @@
                 }
               }
               for(let k=0;k<province.length;k++){
-                //remove spacebar from province[k].name_en
                 let removeSpacebar = province[k].name_en.replace(/\s/g, '');
-                // if(location.trim().includes(province[k].name_en)){
                 if(location.trim().includes(removeSpacebar)){
                   location = province[k].name_th;
                   break;
@@ -200,12 +127,23 @@
           summary = event[j].split(':')[1];
         }
       }
-      // levents.push([start,end,summary,'goingon']);
       if(location == undefined){
         location = '';
       }
-      levents.push([start,end,location,summary,'goingon']);
+      levents.push([start,end,location,summary,'goingon',null,null,null,sourceType]);
     }
+  }
+  async function getoutoldevents(levents){
+    let now = new Date();
+    let nowtime = now.getTime();
+    let eventlist = [];
+
+    for (const feed of calendarFeeds) {
+      const response = await fetch(getCalendarFetchUrl(feed.url));
+      const text = await response.text();
+      await parseCalendarEvents(text, levents, feed.type);
+    }
+
     console.log(levents)
     for(let i=0;i<levents.length;i++){
       let start = new Date(levents[i][0]);
@@ -303,7 +241,7 @@
       //     break;
       //   }
       // }
-      if(nowtime>=starttime && nowtime>=endtime){
+      if(nowtime>=starttime && nowtime>=endtime && levents[i][8] !== 'other'){
         eventlist.push(levents[i]);
       }
     }
@@ -420,12 +358,12 @@
             {/if}
             {#if i == 0}
               {#if event[7] == 'allday'}
-                <Card body>{getthainotimeformat(event[0])} - {event[3]}</Card>
+                <Card body class={getEventCardClass(event)}>{getthainotimeformat(event[0])} - {event[3]}</Card>
               {:else if event[7] == 'sameday'}
-                <Card body>{getthaiformat(event[0])} ถึง {gettimeformat(event[1])} - {event[3]}</Card>
+                <Card body class={getEventCardClass(event)}>{getthaiformat(event[0])} ถึง {gettimeformat(event[1])} - {event[3]}</Card>
               {:else}
               <Accordion>
-                <AccordionItem class="apple-calendar-accordion" header="{getthaiformat(event[0])} - {event[3]}">
+                <AccordionItem class={getEventAccordionClass(event)} header="{getthaiformat(event[0])} - {event[3]}">
                   <!--Card body-->
                   <p><Icon name="calendar-event" /> {getthaiformat(event[0])}</p>
                   <!-- <p style="display: inline-flex;"><Avatar src={event[6]} /> {event[3]}</p> -->
@@ -445,12 +383,12 @@
               {/if}
             {:else}
               {#if event[7] == 'allday'}
-                <Card body>{getthainotimeformat(event[0])} - {event[3]}</Card>
+                <Card body class={getEventCardClass(event)}>{getthainotimeformat(event[0])} - {event[3]}</Card>
               {:else if event[7] == 'sameday'}
-                <Card body>{getthaiformat(event[0])} ถึง {gettimeformat(event[1])} - {event[3]}</Card>
+                <Card body class={getEventCardClass(event)}>{getthaiformat(event[0])} ถึง {gettimeformat(event[1])} - {event[3]}</Card>
               {:else}
               <Accordion>
-                <AccordionItem class="apple-calendar-accordion" header="{getthaiformat(event[0])} - {event[3]}">
+                <AccordionItem class={getEventAccordionClass(event)} header="{getthaiformat(event[0])} - {event[3]}">
                   <!--Card body-->
                   <p><Icon name="calendar-event" /> {getthaiformat(event[0])}</p>
                   <!-- <p style="display: inline-flex;"><Avatar src={event[6]} /> {event[3]}</p> -->
@@ -480,7 +418,7 @@
             <Card body><p class="mb-0">กำลังโหลด......</p></Card>
           {:then list}
             {#each list as event, i}
-              <Card body class="apple-calendar-card">
+              <Card body class={getEventCardClass(event)}>
                 <p><Icon name="calendar-event" /> {getthaiformat(event[0])}</p>
                 <!-- <p style="display: inline-flex;"><Avatar src={event[6]} /> {event[3]}</p> -->
                 <Row>
@@ -547,12 +485,25 @@
   overflow: hidden;
 }
 
+:global(.other-calendar-accordion .accordion-item) {
+  border-top: 4px solid #ff9500 !important;
+  border-radius: 0.5rem;
+  overflow: hidden;
+}
+
 :global(.apple-calendar-accordion .accordion-button) {
   background: transparent;
 }
 
 :global(.apple-calendar-card) {
   border-top: 4px solid #007aff !important;
+  border-radius: 0.5rem;
+  overflow: hidden;
+  background: transparent;
+}
+
+:global(.other-calendar-card) {
+  border-top: 4px solid #ff9500 !important;
   border-radius: 0.5rem;
   overflow: hidden;
   background: transparent;
