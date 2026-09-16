@@ -104,13 +104,11 @@
           if(end.includes('VALUE=DATE')){
             end = end.split(':')[1];
             end = end.slice(4,6)+'-'+end.slice(6,8)+'-'+end.slice(0,4)+' 00:00';
-            let startdate = new Date(start);
             let enddate = new Date(end);
-            let startdatetime = startdate.getTime();
-            let enddatetime = enddate.getTime();
-            if((enddatetime-startdatetime)/86400000 == 1){
-              end = start.slice(0,11)+'23:59';
-            }
+            enddate.setDate(enddate.getDate() - 1);
+            end = ('0' + (enddate.getMonth() + 1)).slice(-2) + '-' +
+              ('0' + enddate.getDate()).slice(-2) + '-' +
+              enddate.getFullYear() + ' 23:59';
           } else if(end.includes('TZID=Asia/Bangkok')){
             end = end.split(':')[1];
             end = end.slice(4,6)+'-'+end.slice(6,8)+'-'+end.slice(0,4)+' '+end.slice(9,11)+':'+end.slice(11,13);
@@ -184,10 +182,10 @@
       console.log(nowtime)
       console.log(endtime)
       //if start time and end time is 24 hour
-      if((start.getHours() == 0 && start.getMinutes() == 0 && end.getHours() == 23 && end.getMinutes() == 59 && start.getDate() == end.getDate()) || (start.getHours() == 0 && start.getMinutes() == 0 && end.getHours() == 0 && end.getMinutes() == 0 && start.getDate() != start.getDate()+1)){
+      if(start.getHours() == 0 && start.getMinutes() == 0 && end.getHours() == 23 && end.getMinutes() == 59){
         levents[i][7] = 'allday';
         //if start time and end time is same day
-      } else if(start.getDate() == end.getDate()){
+      } else if(isSameCalendarDay(start, end)){
         levents[i][7] = 'sameday';
       } else {
         levents[i][7] = 'notsameday';
@@ -294,7 +292,7 @@
     let starttime = new Date(start);
     let endtime = new Date(end);
     //if starttime and endtime is same day
-    if(starttime.getDate() == endtime.getDate()){
+    if(isSameCalendarDay(starttime, endtime)){
       if(starttime.getHours() == 0 && endtime.getHours() == 23){
         return 'ทั้งวัน'
       }
@@ -311,6 +309,18 @@
   function getthainotimeformat(date){
     let time = new Date(date);
     return 'วันที่ '+time.getDate()+' '+getmonth(time.getMonth())+' '+(time.getFullYear()+543);
+  }
+  function isSameCalendarDay(start, end) {
+    return start.getFullYear() == end.getFullYear() &&
+      start.getMonth() == end.getMonth() &&
+      start.getDate() == end.getDate();
+  }
+  function getAlldayLabel(start, end) {
+    const starttime = new Date(start);
+    const endtime = new Date(end);
+    return isSameCalendarDay(starttime, endtime)
+      ? getthainotimeformat(start)
+      : getthainotimeformat(start) + ' ถึง ' + getthainotimeformat(end);
   }
   function gettimeformat(date){
     let time = new Date(date);
@@ -358,7 +368,7 @@
             {/if}
             {#if i == 0}
               {#if event[7] == 'allday'}
-                <Card body class={getEventCardClass(event)}>{getthainotimeformat(event[0])} - {event[3]}</Card>
+                <Card body class={getEventCardClass(event)}>{getAlldayLabel(event[0], event[1])} - {event[3]}</Card>
               {:else if event[7] == 'sameday'}
                 <Card body class={getEventCardClass(event)}>{getthaiformat(event[0])} ถึง {gettimeformat(event[1])} - {event[3]}</Card>
               {:else}
@@ -383,7 +393,7 @@
               {/if}
             {:else}
               {#if event[7] == 'allday'}
-                <Card body class={getEventCardClass(event)}>{getthainotimeformat(event[0])} - {event[3]}</Card>
+                <Card body class={getEventCardClass(event)}>{getAlldayLabel(event[0], event[1])} - {event[3]}</Card>
               {:else if event[7] == 'sameday'}
                 <Card body class={getEventCardClass(event)}>{getthaiformat(event[0])} ถึง {gettimeformat(event[1])} - {event[3]}</Card>
               {:else}
