@@ -1,0 +1,80 @@
+{
+  ".vscode/extensions.json": {
+    "mtime": 1790745838.8149488,
+    "seen": 1790746160.13415,
+    "ast_hash": "200d2e103f19aa20cbc8eb59dd6079b1",
+    "semantic_hash": "200d2e103f19aa20cbc8eb59dd6079b1"
+  },
+  "jsconfig.json": {
+    "mtime": 1790745838.8149488,
+    "seen": 1790746160.1341577,
+    "ast_hash": "e2ef24587c35e67c914c5593b63e1630",
+    "semantic_hash": "e2ef24587c35e67c914c5593b63e1630"
+  },
+  "package.json": {
+    "mtime": 1790745838.818949,
+    "seen": 1790746160.1341615,
+    "ast_hash": "279b80a2a897998151a4a1ea789234cd",
+    "semantic_hash": "279b80a2a897998151a4a1ea789234cd"
+  },
+  "src/App.svelte": {
+    "mtime": 1790745838.818949,
+    "seen": 1790746160.1341639,
+    "ast_hash": "535b6c525f923555212c7acfae19a9c6",
+    "semantic_hash": "535b6c525f923555212c7acfae19a9c6"
+  },
+  "src/lib/Counter.svelte": {
+    "mtime": 1790745838.818949,
+    "seen": 1790746160.1341662,
+    "ast_hash": "74383e5d33b73497abe58e782ca1e5cc",
+    "semantic_hash": "74383e5d33b73497abe58e782ca1e5cc"
+  },
+  "src/main.js": {
+    "mtime": 1790745838.818949,
+    "seen": 1790746160.1341681,
+    "ast_hash": "4f998cbe471bd4ce2e9353b018f6c571",
+    "semantic_hash": "4f998cbe471bd4ce2e9353b018f6c571"
+  },
+  "src/vite-env.d.ts": {
+    "mtime": 1790745838.818949,
+    "seen": 1790746160.1341698,
+    "ast_hash": "b3ea8efbd34fc47efac356333b135a8e",
+    "semantic_hash": "b3ea8efbd34fc47efac356333b135a8e"
+  },
+  "tsconfig.json": {
+    "mtime": 1790745838.818949,
+    "seen": 1790746160.1341715,
+    "ast_hash": "ffeca029aafe1a6d9f5dbc9e803764ae",
+    "semantic_hash": "ffeca029aafe1a6d9f5dbc9e803764ae"
+  },
+  "vite.config.js": {
+    "mtime": 1790745838.818949,
+    "seen": 1790746160.1341734,
+    "ast_hash": "8c1e769bee356ca506cd366e71d2aab0",
+    "semantic_hash": "8c1e769bee356ca506cd366e71d2aab0"
+  },
+  "README.md": {
+    "mtime": 1790745838.8149488,
+    "seen": 1790746160.134175,
+    "ast_hash": "e349bf7cfe084316b65a0c03ed1a08f6",
+    "semantic_hash": "e349bf7cfe084316b65a0c03ed1a08f6"
+  },
+  "index.html": {
+    "mtime": 1790745838.8149488,
+    "seen": 1790746160.1341767,
+    "ast_hash": "f602fc545b63da2dcbbf9d1f529b508f",
+    "semantic_hash": "f602fc545b63da2dcbbf9d1f529b508f"
+  },
+  "test.txt": {
+    "mtime": 1790745838.818949,
+    "seen": 1790746160.1341789,
+    "ast_hash": "f80f0e844adef89a990cca2f2a950aa2",
+    "semantic_hash": "f80f0e844adef89a990cca2f2a950aa2"
+  },
+  "src/assets/svelte.png": {
+    "mtime": 1790745838.818949,
+    "seen": 1790746160.1341803,
+    "ast_hash": "087bf945b9f69c0abd4d9f3862440327",
+    "semantic_hash": "087bf945b9f69c0abd4d9f3862440327"
+  }
+}

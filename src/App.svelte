@@ -20,7 +20,8 @@
     }
   ];
   function getCalendarFetchUrl(url) {
-    const normalizedUrl = url.replace(/^webcal:\/\//i, 'https://').replace(/^https?:\/\//i, '');
+    if (!url) return '';
+    const normalizedUrl = String(url).replace(/^webcal:\/\//i, 'https://').replace(/^https?:\/\//i, '');
     return `https://cors-fany.vercel.app/${normalizedUrl}`;
   }
   function getEventCardClass(event) {
@@ -67,30 +68,35 @@
       for(let j=0;j<event.length;j++){
         if(event[j].includes('LOCATION')){
           if(event[j].includes(':')) {
-            if(event[j].split(':')[1].includes('https')){
+            const rawLocation = event[j].split(':').slice(1).join(':') ?? '';
+            if((rawLocation || '').includes('https')){
               location = '';
             }else{
-              location = event[j].split(':')[1];
-              let provinceapi = (await fetch("https://raw.githubusercontent.com/kongvut/thai-province-data/refs/heads/master/api/latest/province.json")).json();
-              let province = await provinceapi;
-              for(let k=0;k<province.length;k++){
-                if(province[k].name_en == location.trim()){
-                  location = province[k].name_th;
-                  break;
+              location = rawLocation || '';
+              try {
+                let provinceapi = (await fetch("https://raw.githubusercontent.com/kongvut/thai-province-data/refs/heads/master/api/latest/province.json")).json();
+                let province = await provinceapi;
+                for(let k=0;k<province.length;k++){
+                  if((province[k].name_en ?? '') == String(location ?? '').trim()){
+                    location = province[k].name_th;
+                    break;
+                  }
                 }
-              }
-              for(let k=0;k<province.length;k++){
-                let removeSpacebar = province[k].name_en.replace(/\s/g, '');
-                if(location.trim().includes(removeSpacebar)){
-                  location = province[k].name_th;
-                  break;
+                for(let k=0;k<province.length;k++){
+                  let removeSpacebar = String(province[k].name_en ?? '').replace(/\s/g, '');
+                  if(removeSpacebar && String(location ?? '').trim().includes(removeSpacebar)){
+                    location = province[k].name_th;
+                    break;
+                  }
                 }
+              } catch(e) {
+                console.warn('province lookup failed', e);
               }
             }
           }
         }
         if(event[j].includes('DTSTART;')){
-          start = event[j].split(';')[1];
+          start = event[j].split(';')[1] ?? '';
           if(start.includes('VALUE=DATE')){
             start = start.split(':')[1];
             start = start.slice(4,6)+'-'+start.slice(6,8)+'-'+start.slice(0,4)+' 00:00';
@@ -100,7 +106,7 @@
           }
         }
         if(event[j].includes('DTEND;')){
-          end = event[j].split(';')[1];
+          end = event[j].split(';')[1] ?? '';
           if(end.includes('VALUE=DATE')){
             end = end.split(':')[1];
             end = end.slice(4,6)+'-'+end.slice(6,8)+'-'+end.slice(0,4)+' 00:00';
@@ -122,11 +128,23 @@
           }
         }
         if(event[j].includes('SUMMARY')){
-          summary = event[j].split(':')[1];
+          summary = event[j].split(':').slice(1).join(':') ?? '';
         }
       }
-      if(location == undefined){
+      if(location == undefined || location == null){
         location = '';
+      }
+      if(start == undefined || start == null){
+        start = '';
+      }
+      if(end == undefined || end == null){
+        end = '';
+      }
+      if(summary == undefined || summary == null){
+        summary = '';
+      }
+      if(!start || !end){
+        continue;
       }
       levents.push([start,end,location,summary,'goingon',null,null,null,sourceType]);
     }
@@ -144,6 +162,9 @@
 
     console.log(levents)
     for(let i=0;i<levents.length;i++){
+      if(!levents[i] || !levents[i][0] || !levents[i][1]){
+        continue;
+      }
       let start = new Date(levents[i][0]);
       let end = new Date(levents[i][1]);
       let starttime = start.getTime();
@@ -158,27 +179,30 @@
       //  }
       //}
       //if levents[i][2] == 'นนทบุรี' then levents[i][5] = 'https://img.gs/fhcphvsghs/120x120,crop/https://www.phuket.go.th/webpk/images/introduce/logo-phuket2565.jpg'
+      const loc = String(levents[i][2] ?? '');
+      const title = String(levents[i][3] ?? '');
       levents[i][6] = 'https://cdn-icons-png.flaticon.com/512/5973/5973800.png'
-      if(levents[i][2].trim() == 'นนทบุรี' || levents[i][3].includes('บริษัท')){
+      if(loc.trim() == 'นนทบุรี' || title.includes('บริษัท')){
         levents[i][6] = 'https://ww2.nonthaburi.go.th/images/footer-32-1/building.png'
       }
-      if(levents[i][2].trim() == 'พัทยา' || levents[i][3].includes('พัทยา')){
+      if(loc.trim() == 'พัทยา' || title.includes('พัทยา')){
         levents[i][6] = 'https://img.gs/fhcphvsghs/120x120,crop/https://upload.wikimedia.org/wikipedia/commons/6/64/Pattaya_seal.png'
       }
-      if(levents[i][2].trim() == 'กรุงเทพ'){
+      if(loc.trim() == 'กรุงเทพ'){
         levents[i][6] = 'https://img.gs/fhcphvsghs/120x120,crop/https://upload.wikimedia.org/wikipedia/commons/thumb/7/7b/Seal_of_Bangkok_Metro_Authority.png/2048px-Seal_of_Bangkok_Metro_Authority.png'
       }
-      if(levents[i][2].trim() == 'ภูเก็ต'){
+      if(loc.trim() == 'ภูเก็ต'){
         levents[i][6] = 'https://img.gs/fhcphvsghs/120x120,crop/https://cors-fany.vercel.app/www.phuket.go.th/webpk/images/introduce/logo-phuket2565.jpg'
       }
-      if(levents[i][2].trim() == 'ขอนแก่น'){
+      if(loc.trim() == 'ขอนแก่น'){
         levents[i][6] = 'https://img.gs/fhcphvsghs/120x120,crop/https://khonkaen.m-culture.go.th/web-upload/1005x9680e19a89465bf0531f017d8ef94780/tinymce/94-bfc6edecc2a4da646bd0824086ba8dea/%E0%B8%AA%E0%B8%B1%E0%B8%8D%E0%B8%A5%E0%B8%B1%E0%B8%81%E0%B8%A9%E0%B8%93%E0%B9%8C%E0%B8%9B%E0%B8%A3%E0%B8%B0%E0%B8%88%E0%B8%B3%E0%B8%88%E0%B8%B1%E0%B8%87%E0%B8%AB%E0%B8%A7%E0%B8%B1%E0%B8%94/khonkaenLogo.png'
       }
-      if(levents[i][2].trim() == 'ชลบุรี'){
+      if(loc.trim() == 'ชลบุรี'){
         levents[i][6] = 'https://img.gs/fhcphvsghs/120x120,crop/https://ww2.chonburi.go.th/images/content/logo/logo.png'
       }
       //levents[i][2] replace \n to ' '
-      levents[i][2] = levents[i][2].replace(/\n/g,' ');
+      levents[i][2] = loc.replace(/\n/g,' ');
+      levents[i][3] = title;
       console.log(nowtime)
       console.log(endtime)
       //if start time and end time is 24 hour
@@ -332,7 +356,7 @@
     if(filterApplied) {
       window.location.reload();
     }
-    let filtered = events.filter(event => event[2].trim() !== '');
+    let filtered = events.filter(event => String(event[2] ?? '').trim() !== '');
     events = filtered;
     filterApplied = true;
   }
